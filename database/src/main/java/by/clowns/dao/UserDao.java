@@ -15,7 +15,7 @@ public class UserDao implements Dao<User> {
 
     private static UserDao INSTANCE = null;
 
-    private UserDao(){};
+    private UserDao(){}
 
     public static UserDao getInstance() {
         if(INSTANCE == null) {
@@ -42,14 +42,15 @@ public class UserDao implements Dao<User> {
         Set<User> users = new HashSet<>();
 
         Transaction transaction = session.beginTransaction();
-
-        for (long i = 0; session.get(User.class, i) != null; i++){
-            users.add(session.get(User.class, i));
+        long i = 0;
+        User user = session.get(User.class, i);
+        for (i = 1; user != null; i++){
+            user = session.get(User.class, i);
+            users.add(user);
         }
 
         transaction.commit();
         session.close();
-        SESSION_FACTORY.close();
         return users;
     }
 
@@ -64,7 +65,7 @@ public class UserDao implements Dao<User> {
 
         session.persist(user);
 
-        user = entity;
+        user.setSurname(entity.getSurname());
 
         transaction.commit();
         session.close();
@@ -75,10 +76,12 @@ public class UserDao implements Dao<User> {
     public void delete(long id) {
 
         Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
 
         User user = session.get(User.class, id);
         session.delete(user);
 
+        transaction.commit();
         session.close();
         SESSION_FACTORY.close();
     }
@@ -91,7 +94,6 @@ public class UserDao implements Dao<User> {
         User user = session.get(User.class, id);
 
         session.close();
-        SESSION_FACTORY.close();
         return user;
     }
 }
