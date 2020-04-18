@@ -37,7 +37,7 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public Set<User> reed() {
+    public Set<User> read() {
 
         Set<User> users = new HashSet<>();
         long id = 1;

@@ -6,7 +6,7 @@ public interface Dao <T> {
 
     void create(T entity);
 
-    Set<T> reed();
+    Set<T> read();
 
     void update(T entity, long id);
 
