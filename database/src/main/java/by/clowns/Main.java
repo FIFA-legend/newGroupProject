@@ -1,19 +1,25 @@
 package by.clowns;
 
 import by.clowns.dao.Dao;
+import by.clowns.dao.RegionDao;
 import by.clowns.dao.UserDao;
 import by.clowns.entity.*;
+
 
 import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
 
-        Dao<User> dao = UserDao.getInstance();
+        Dao<Region> dao = RegionDao.getInstance();
 
-        Set<User> users = dao.reed();
+        Region region = new Region();
+        region.setName("Voshod");
 
-        System.out.println(users.iterator().hasNext());
+        dao.create(region);
+//        Set<Region> users = dao.reed();
 
+//        System.out.println(users.iterator().hasNext());
+        System.out.println(region);
     }
 }
