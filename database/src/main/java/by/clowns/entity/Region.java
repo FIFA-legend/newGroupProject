@@ -18,7 +18,7 @@ public class Region extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "regions_cars",
             joinColumns = @JoinColumn(name = "region_id"),

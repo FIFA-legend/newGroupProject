@@ -1,5 +1,6 @@
 package by.clowns.dao;
 
+import by.clowns.entity.Region;
 import by.clowns.entity.User;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
@@ -10,23 +11,23 @@ import org.hibernate.cfg.Configuration;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserDao implements Dao<User> {
+public class RegionDao implements Dao<Region> {
 
     final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
 
-    private static UserDao INSTANCE = null;
+    private static RegionDao INSTANCE = null;
 
-    private UserDao(){}
+    private RegionDao(){}
 
-    public static UserDao getInstance() {
+    public static RegionDao getInstance() {
         if(INSTANCE == null) {
-            INSTANCE = new UserDao();
+            INSTANCE = new RegionDao();
         }
         return INSTANCE;
     }
 
     @Override
-    public void create(User entity) {
+    public void create(Region entity) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -37,36 +38,34 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public Set<User> reed() {
+    public Set<Region> reed() {
 
-        Set<User> users = new HashSet<>();
+        Set<Region> regions = new HashSet<>();
         long id = 1;
 
         while (true) {
-            User user;
-            user = this.get(id);
+            Region region;
+            region = this.get(id);
             id++;
-            if (user != null) {
-                users.add(user);
+            if (region != null) {
+                regions.add(region);
             } else {
-                return users;
+                return regions;
             }
         }
     }
 
     @Override
-    public void update(User entity, long id) {
+    public void update(Region entity, long id) {
 
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        User user = session.get(User.class, id);
-        session.replicate(user, ReplicationMode.OVERWRITE);
+        Region region = session.get(Region.class, id);
+        session.replicate(region, ReplicationMode.OVERWRITE);
 
-        user.setName(entity.getName());
-        user.setSurname(entity.getSurname());
-        user.setPassport(entity.getPassport());
-        user.setRole(entity.getRole());
+        region.setName(entity.getName());
+        region.setCars(entity.getCars());
 
         transaction.commit();
         session.close();
@@ -78,21 +77,21 @@ public class UserDao implements Dao<User> {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        User user = session.get(User.class, id);
-        session.delete(user);
+        Region region = session.get(Region.class, id);
+        session.delete(region);
 
         transaction.commit();
         session.close();
     }
 
     @Override
-    public User get(long id) {
+    public Region get(long id) {
 
         Session session = SESSION_FACTORY.openSession();
 
-        User user = session.get(User.class, id);
+        Region region = session.get(Region.class, id);
 
         session.close();
-        return user;
+        return region;
     }
 }
