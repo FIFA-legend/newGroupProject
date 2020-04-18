@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Getter
@@ -26,7 +23,7 @@ public class Car extends BaseEntity {
     @Column(name = "number")
     private String number;
 
-    @ManyToMany(mappedBy = "cars")
+    @ManyToMany(mappedBy = "cars", fetch = FetchType.EAGER)
     private Set<Region> regions;
 
     public Car(double price, String number) {

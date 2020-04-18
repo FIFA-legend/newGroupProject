@@ -13,4 +13,6 @@ public interface Dao <T> {
     void delete(long id);
 
     T get(long id);
+
+    void close();
 }

@@ -37,8 +37,7 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public Set<User> read() {
-
+    public Set<User> reed() {
         Set<User> users = new HashSet<>();
         long id = 1;
 
@@ -56,7 +55,6 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void update(User entity, long id) {
-
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -74,7 +72,6 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void delete(long id) {
-
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -87,12 +84,16 @@ public class UserDao implements Dao<User> {
 
     @Override
     public User get(long id) {
-
         Session session = SESSION_FACTORY.openSession();
 
         User user = session.get(User.class, id);
 
         session.close();
         return user;
+    }
+
+    @Override
+    public void close() {
+        SESSION_FACTORY.close();
     }
 }

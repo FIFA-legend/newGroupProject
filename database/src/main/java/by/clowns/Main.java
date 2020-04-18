@@ -1,19 +1,25 @@
 package by.clowns;
 
+import by.clowns.dao.CarDao;
 import by.clowns.dao.Dao;
+import by.clowns.dao.RegionDao;
 import by.clowns.dao.UserDao;
 import by.clowns.entity.*;
 
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
 
-        Dao<User> dao = UserDao.getInstance();
+        Dao<Car> carDao = CarDao.getInstance();
+        Dao<Region> regionDao = RegionDao.getInstance();
 
-        Set<User> users = dao.read();
+        Car car = carDao.get(1);
 
-        System.out.println(users.iterator().hasNext());
-
+        carDao.close();
+        regionDao.close();
+        System.out.println(car);
     }
 }

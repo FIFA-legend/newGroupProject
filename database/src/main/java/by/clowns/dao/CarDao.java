@@ -1,7 +1,6 @@
 package by.clowns.dao;
 
-import by.clowns.entity.Region;
-import by.clowns.entity.User;
+import by.clowns.entity.Car;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,23 +10,23 @@ import org.hibernate.cfg.Configuration;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RegionDao implements Dao<Region> {
+public class CarDao implements Dao<Car> {
 
     final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
 
-    private static RegionDao INSTANCE = null;
+    private static CarDao INSTANCE = null;
 
-    private RegionDao(){}
+    private CarDao(){}
 
-    public static RegionDao getInstance() {
+    public static CarDao getInstance() {
         if(INSTANCE == null) {
-            INSTANCE = new RegionDao();
+            INSTANCE = new CarDao();
         }
         return INSTANCE;
     }
 
     @Override
-    public void create(Region entity) {
+    public void create(Car entity) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -38,32 +37,33 @@ public class RegionDao implements Dao<Region> {
     }
 
     @Override
-    public Set<Region> reed() {
-        Set<Region> regions = new HashSet<>();
+    public Set<Car> reed() {
+        Set<Car> cars = new HashSet<>();
         long id = 1;
 
         while (true) {
-            Region region;
-            region = this.get(id);
+            Car car;
+            car = this.get(id);
             id++;
-            if (region != null) {
-                regions.add(region);
+            if (car != null) {
+                cars.add(car);
             } else {
-                return regions;
+                return cars;
             }
         }
     }
 
     @Override
-    public void update(Region entity, long id) {
+    public void update(Car entity, long id) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Region region = session.get(Region.class, id);
-        session.replicate(region, ReplicationMode.OVERWRITE);
+        Car car = session.get(Car.class, id);
+        session.replicate(car, ReplicationMode.OVERWRITE);
 
-        region.setName(entity.getName());
-        region.setCars(entity.getCars());
+        car.setPrice(entity.getPrice());
+        car.setNumber(entity.getNumber());
+        car.setRegions(entity.getRegions());
 
         transaction.commit();
         session.close();
@@ -74,21 +74,21 @@ public class RegionDao implements Dao<Region> {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Region region = session.get(Region.class, id);
-        session.delete(region);
+        Car car = session.get(Car.class, id);
+        session.delete(car);
 
         transaction.commit();
         session.close();
     }
 
     @Override
-    public Region get(long id) {
+    public Car get(long id) {
         Session session = SESSION_FACTORY.openSession();
 
-        Region region = session.get(Region.class, id);
+        Car car = session.get(Car.class, id);
 
         session.close();
-        return region;
+        return car;
     }
 
     @Override
