@@ -4,7 +4,7 @@ import by.clowns.dao.Dao;
 import by.clowns.dao.UserDao;
 import by.clowns.entity.*;
 
-import java.util.HashSet;
+
 import java.util.Set;
 
 public class Main {
@@ -12,12 +12,9 @@ public class Main {
 
         Dao<User> dao = UserDao.getInstance();
 
-//        Set<User> users = dao.reed();
-        User user = new User("Dimas", "Lugas", null, Role.CLIENT);
+        Set<User> users = dao.reed();
 
-        dao.update(user, 2);
-
-//        System.out.println(users.iterator().hasNext());
+        System.out.println(users.iterator().hasNext());
 
     }
 }

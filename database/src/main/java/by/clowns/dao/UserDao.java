@@ -38,21 +38,20 @@ public class UserDao implements Dao<User> {
     @Override
     public Set<User> reed() {
 
-        Session session = SESSION_FACTORY.openSession();
-
         Set<User> users = new HashSet<>();
+        long i = 1;
 
-        Transaction transaction = session.beginTransaction();
-        long i = 0;
-        User user = session.get(User.class, i);
-        for (i = 1; user != null; i++){
-            user = session.get(User.class, i);
-            users.add(user);
+        while (true) {
+            User user;
+            user = this.get(i);
+            System.out.println(user);
+            i++;
+            if(user != null) {
+                users.add(user);
+            } else {
+                return users;
+            }
         }
-
-        transaction.commit();
-        session.close();
-        return users;
     }
 
     @Override
