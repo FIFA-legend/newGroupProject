@@ -1,6 +1,7 @@
 package by.clowns.dao;
 
 import by.clowns.entity.User;
+import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -63,9 +64,12 @@ public class UserDao implements Dao<User> {
 
         User user = session.get(User.class, id);
 
-        session.persist(user);
+        session.replicate(user, ReplicationMode.OVERWRITE);
 
+        user.setName(entity.getName());
         user.setSurname(entity.getSurname());
+        user.setPassport(entity.getPassport());
+        user.setRole(entity.getRole());
 
         transaction.commit();
         session.close();

@@ -13,9 +13,9 @@ public class Main {
         Dao<User> dao = UserDao.getInstance();
 
 //        Set<User> users = dao.reed();
-        User user = new User("Nik", "Krutoi", null, Role.CLIENT);
+        User user = new User("Dimas", "Lugas", null, Role.CLIENT);
 
-        dao.update(user, 1);
+        dao.update(user, 2);
 
 //        System.out.println(users.iterator().hasNext());
 
