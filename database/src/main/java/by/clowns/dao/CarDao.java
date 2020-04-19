@@ -37,7 +37,7 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public Set<Car> reed() {
+    public Set<Car> read() {
         Set<Car> cars = new HashSet<>();
         long id = 1;
 

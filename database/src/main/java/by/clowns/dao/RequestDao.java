@@ -36,7 +36,7 @@ public class RequestDao implements Dao<Request> {
     }
 
     @Override
-    public Set<Request> reed() {
+    public Set<Request> read() {
         return null;
     }
 

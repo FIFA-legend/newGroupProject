@@ -3,10 +3,6 @@ package by.clowns;
 import by.clowns.dao.*;
 import by.clowns.entity.*;
 
-
-import java.util.HashSet;
-import java.util.Set;
-
 public class Main {
     public static void main(String[] args) {
 
