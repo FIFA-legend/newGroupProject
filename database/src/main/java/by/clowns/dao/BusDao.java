@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class BusDao implements Dao<Bus> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static BusDao INSTANCE = null;
 
@@ -22,6 +22,7 @@ public class BusDao implements Dao<Bus> {
         if(INSTANCE == null) {
             INSTANCE = new BusDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 

@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class RequestDao implements Dao<Request> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static RequestDao INSTANCE = null;
 
@@ -21,6 +21,7 @@ public class RequestDao implements Dao<Request> {
         if (INSTANCE == null) {
             INSTANCE = new RequestDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 

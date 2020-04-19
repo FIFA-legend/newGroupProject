@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class TaxiDao implements Dao<Taxi> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static TaxiDao INSTANCE = null;
 
@@ -23,6 +23,7 @@ public class TaxiDao implements Dao<Taxi> {
         if (INSTANCE == null) {
             INSTANCE = new TaxiDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 

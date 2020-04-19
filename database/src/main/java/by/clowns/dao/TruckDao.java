@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class TruckDao implements Dao<Truck> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static TruckDao INSTANCE = null;
 
@@ -23,6 +23,7 @@ public class TruckDao implements Dao<Truck> {
         if(INSTANCE == null) {
             INSTANCE = new TruckDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 

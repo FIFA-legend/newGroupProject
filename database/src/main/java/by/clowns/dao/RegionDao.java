@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class RegionDao implements Dao<Region> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static RegionDao INSTANCE = null;
 
@@ -23,6 +23,7 @@ public class RegionDao implements Dao<Region> {
         if(INSTANCE == null) {
             INSTANCE = new RegionDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 

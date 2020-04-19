@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class CarDao implements Dao<Car> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static CarDao INSTANCE = null;
 
@@ -22,6 +22,7 @@ public class CarDao implements Dao<Car> {
         if(INSTANCE == null) {
             INSTANCE = new CarDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 

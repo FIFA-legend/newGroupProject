@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class UserDao implements Dao<User> {
 
-    final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    static SessionFactory SESSION_FACTORY;
 
     private static UserDao INSTANCE = null;
 
@@ -22,6 +22,7 @@ public class UserDao implements Dao<User> {
         if(INSTANCE == null) {
             INSTANCE = new UserDao();
         }
+        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
         return INSTANCE;
     }
 
