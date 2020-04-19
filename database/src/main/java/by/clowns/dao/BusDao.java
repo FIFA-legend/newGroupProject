@@ -1,6 +1,6 @@
 package by.clowns.dao;
 
-import by.clowns.entity.Car;
+import by.clowns.entity.Bus;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,23 +10,23 @@ import org.hibernate.cfg.Configuration;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CarDao implements Dao<Car> {
+public class BusDao implements Dao<Bus> {
 
     final static SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
 
-    private static CarDao INSTANCE = null;
+    private static BusDao INSTANCE = null;
 
-    private CarDao(){}
+    private BusDao(){}
 
-    public static CarDao getInstance() {
+    public static BusDao getInstance() {
         if(INSTANCE == null) {
-            INSTANCE = new CarDao();
+            INSTANCE = new BusDao();
         }
         return INSTANCE;
     }
 
     @Override
-    public void create(Car entity) {
+    public void create(Bus entity) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -37,12 +37,12 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public Set<Car> reed() {
-        Set<Car> cars = new HashSet<>();
+    public Set<Bus> reed() {
+        Set<Bus> cars = new HashSet<>();
         long id = 1;
 
         while (true) {
-            Car car;
+            Bus car;
             car = this.get(id);
             id++;
             if (car != null) {
@@ -54,17 +54,18 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public void update(Car entity, long id) {
+    public void update(Bus entity, long id) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Car car = session.get(Car.class, id);
+        Bus car = session.get(Bus.class, id);
         session.replicate(car, ReplicationMode.OVERWRITE);
 
         car.setPrice(entity.getPrice());
         car.setNumber(entity.getNumber());
         car.setRegions(entity.getRegions());
         car.setRequest(entity.getRequest());
+        car.setCapacity(entity.getCapacity());
 
         transaction.commit();
         session.close();
@@ -75,7 +76,7 @@ public class CarDao implements Dao<Car> {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Car car = session.get(Car.class, id);
+        Bus car = session.get(Bus.class, id);
         session.delete(car);
 
         transaction.commit();
@@ -83,10 +84,10 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public Car get(long id) {
+    public Bus get(long id) {
         Session session = SESSION_FACTORY.openSession();
 
-        Car car = session.get(Car.class, id);
+        Bus car = session.get(Bus.class, id);
 
         session.close();
         return car;

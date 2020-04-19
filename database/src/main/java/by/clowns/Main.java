@@ -1,9 +1,6 @@
 package by.clowns;
 
-import by.clowns.dao.CarDao;
-import by.clowns.dao.Dao;
-import by.clowns.dao.RegionDao;
-import by.clowns.dao.UserDao;
+import by.clowns.dao.*;
 import by.clowns.entity.*;
 
 
@@ -15,11 +12,14 @@ public class Main {
 
         Dao<Car> carDao = CarDao.getInstance();
         Dao<Region> regionDao = RegionDao.getInstance();
+        Dao<Request> requestDao = RequestDao.getInstance();
+        Dao<User> userDao = UserDao.getInstance();
 
         Car car = carDao.get(1);
 
         carDao.close();
         regionDao.close();
-        System.out.println(car);
+        requestDao.close();
+        System.out.println();
     }
 }

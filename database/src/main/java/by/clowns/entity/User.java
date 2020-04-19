@@ -27,7 +27,7 @@ public class User extends BaseEntity {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Request> requests;
 
     public User(String name, String surname, Passport passport, Role role) {
