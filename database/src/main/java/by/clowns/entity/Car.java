@@ -26,6 +26,9 @@ public class Car extends BaseEntity {
     @ManyToMany(mappedBy = "cars", fetch = FetchType.EAGER)
     private Set<Region> regions;
 
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER)
+    private Request request;
+
     public Car(double price, String number) {
         this.price = price;
         this.number = number;
