@@ -39,7 +39,7 @@ public class TruckDao implements Dao<Truck> {
     }
 
     @Override
-    public Set<Truck> reed() {
+    public Set<Truck> read() {
         Set<Truck> cars = new HashSet<>();
         long id = 1;
 

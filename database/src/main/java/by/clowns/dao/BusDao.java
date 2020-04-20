@@ -38,7 +38,7 @@ public class BusDao implements Dao<Bus> {
     }
 
     @Override
-    public Set<Bus> reed() {
+    public Set<Bus> read() {
         Set<Bus> cars = new HashSet<>();
         long id = 1;
 

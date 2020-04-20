@@ -14,9 +14,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="database" target="1.8" />
-      <module name="newGroupProject" target="1.8" />
+      <module name="NewGroupProject" target="1.8" />
       <module name="service" target="1.8" />
       <module name="web" target="1.8" />
+      <module name="web2" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

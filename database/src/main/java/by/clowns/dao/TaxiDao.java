@@ -39,7 +39,7 @@ public class TaxiDao implements Dao<Taxi> {
     }
 
     @Override
-    public Set<Taxi> reed() {
+    public Set<Taxi> read() {
         Set<Taxi> cars = new HashSet<>();
         long id = 1;
 
