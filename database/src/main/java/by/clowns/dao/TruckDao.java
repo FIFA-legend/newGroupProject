@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class TruckDao implements Dao<Truck> {
@@ -40,19 +41,15 @@ public class TruckDao implements Dao<Truck> {
 
     @Override
     public Set<Truck> read() {
-        Set<Truck> cars = new HashSet<>();
-        long id = 1;
+        Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
 
-        while (true) {
-            Truck car;
-            car = this.get(id);
-            id++;
-            if (car != null) {
-                cars.add(car);
-            } else {
-                return cars;
-            }
-        }
+        List<Truck> cars = session.createQuery("SELECT a FROM Truck a", Truck.class).getResultList();
+
+        transaction.commit();
+        session.close();
+
+        return new HashSet<>(cars);
     }
 
     @Override

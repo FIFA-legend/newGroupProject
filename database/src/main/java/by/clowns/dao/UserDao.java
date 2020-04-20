@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserDao implements Dao<User> {
@@ -39,19 +40,15 @@ public class UserDao implements Dao<User> {
 
     @Override
     public Set<User> read() {
-        Set<User> users = new HashSet<>();
-        long id = 1;
+        Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
 
-        while (true) {
-            User user;
-            user = this.get(id);
-            id++;
-            if (user != null) {
-                users.add(user);
-            } else {
-                return users;
-            }
-        }
+        List<User> users = session.createQuery("SELECT a FROM User a", User.class).getResultList();
+
+        transaction.commit();
+        session.close();
+
+        return new HashSet<>(users);
     }
 
     @Override

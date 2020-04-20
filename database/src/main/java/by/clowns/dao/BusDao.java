@@ -1,6 +1,7 @@
 package by.clowns.dao;
 
 import by.clowns.entity.Bus;
+import by.clowns.entity.Car;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BusDao implements Dao<Bus> {
@@ -39,19 +41,15 @@ public class BusDao implements Dao<Bus> {
 
     @Override
     public Set<Bus> read() {
-        Set<Bus> cars = new HashSet<>();
-        long id = 1;
+        Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
 
-        while (true) {
-            Bus car;
-            car = this.get(id);
-            id++;
-            if (car != null) {
-                cars.add(car);
-            } else {
-                return cars;
-            }
-        }
+        List<Bus> cars = session.createQuery("SELECT a FROM Bus a", Bus.class).getResultList();
+
+        transaction.commit();
+        session.close();
+
+        return new HashSet<>(cars);
     }
 
     @Override

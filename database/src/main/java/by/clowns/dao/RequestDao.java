@@ -1,5 +1,6 @@
 package by.clowns.dao;
 
+import by.clowns.entity.Region;
 import by.clowns.entity.Request;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
@@ -7,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RequestDao implements Dao<Request> {
@@ -38,7 +41,15 @@ public class RequestDao implements Dao<Request> {
 
     @Override
     public Set<Request> read() {
-        return null;
+        Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<Request> requests = session.createQuery("SELECT a FROM Request a", Request.class).getResultList();
+
+        transaction.commit();
+        session.close();
+
+        return new HashSet<>(requests);
     }
 
     @Override

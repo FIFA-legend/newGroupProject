@@ -1,6 +1,7 @@
 package by.clowns.dao;
 
 import by.clowns.entity.Car;
+import by.clowns.entity.User;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CarDao implements Dao<Car> {
@@ -39,19 +41,15 @@ public class CarDao implements Dao<Car> {
 
     @Override
     public Set<Car> read() {
-        Set<Car> cars = new HashSet<>();
-        long id = 1;
+        Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
 
-        while (true) {
-            Car car;
-            car = this.get(id);
-            id++;
-            if (car != null) {
-                cars.add(car);
-            } else {
-                return cars;
-            }
-        }
+        List<Car> cars = session.createQuery("SELECT a FROM Car a", Car.class).getResultList();
+
+        transaction.commit();
+        session.close();
+
+        return new HashSet<>(cars);
     }
 
     @Override

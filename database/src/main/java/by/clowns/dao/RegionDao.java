@@ -1,5 +1,6 @@
 package by.clowns.dao;
 
+import by.clowns.entity.Car;
 import by.clowns.entity.Region;
 
 import org.hibernate.ReplicationMode;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RegionDao implements Dao<Region> {
@@ -40,19 +42,15 @@ public class RegionDao implements Dao<Region> {
 
     @Override
     public Set<Region> read() {
-        Set<Region> regions = new HashSet<>();
-        long id = 1;
+        Session session = SESSION_FACTORY.openSession();
+        Transaction transaction = session.beginTransaction();
 
-        while (true) {
-            Region region;
-            region = this.get(id);
-            id++;
-            if (region != null) {
-                regions.add(region);
-            } else {
-                return regions;
-            }
-        }
+        List<Region> regions = session.createQuery("SELECT a FROM Region a", Region.class).getResultList();
+
+        transaction.commit();
+        session.close();
+
+        return new HashSet<>(regions);
     }
 
     @Override
