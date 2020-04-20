@@ -1,5 +1,9 @@
 package by.clowns;
 
+import by.clowns.entity.User;
+import by.clowns.service.Service;
+import by.clowns.service.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +16,8 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserService();
-        req.setAttribute("users", userService.getAllUsers());
+        Service<User> userService = UserService.getInstance();
+        req.setAttribute("users", userService.read());
         req.getRequestDispatcher("/WEB-INF/jsp/users.jsp").forward(req, resp);
     }
 }
