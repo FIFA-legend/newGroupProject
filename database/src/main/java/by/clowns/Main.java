@@ -17,10 +17,10 @@ public class Main {
         Dao<User> userDao = UserDao.getInstance();
 
         Passport passport = new Passport();
-        Date date = new Date(2001, 8, 5);
+        Date date = new Date(2001, 6, 41);
         passport.setBirth(date);
-        passport.setPassportId("asdasd");
-        User user = new User("Nikita", "Kolodko", passport, Role.ADMIN);
+        passport.setPassportId("MP666");
+        User user = new User("Dmitri", "Lugovskoi", passport, Role.ADMIN);
         userDao.create(user);
         userDao.close();
         regionDao.close();

@@ -39,7 +39,7 @@ public class RegionDao implements Dao<Region> {
     }
 
     @Override
-    public Set<Region> reed() {
+    public Set<Region> read() {
         Set<Region> regions = new HashSet<>();
         long id = 1;
 
