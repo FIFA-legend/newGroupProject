@@ -5,6 +5,11 @@
     <title>Home</title>
   </head>
   <body>
-<p><a href="${pageContext.request.contextPath}/users">Show all users</a></p>
+<p>
+  <a href="${pageContext.request.contextPath}/users">Show all users</a>
+</p>
+<p>
+  <a href="${pageContext.request.contextPath}/cars">Show all cars</a>
+</p>
   </body>
 </html>
