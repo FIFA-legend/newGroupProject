@@ -13,11 +13,12 @@
     <title>User's List</title>
 </head>
 <body>
-<div align="center">
+<div>
     <c:forEach var="i" items="${requestScope.users}">
         <p>${i.name} ${i.surname} ${i.role}</p>
     </c:forEach>
 </div>
+<div><a href="${pageContext.request.contextPath}">To Home</a></div>
 </body>
 </html>
 
