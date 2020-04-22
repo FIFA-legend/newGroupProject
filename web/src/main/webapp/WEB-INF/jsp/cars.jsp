@@ -1,4 +1,3 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: Asus
@@ -16,10 +15,10 @@
 <body>
 <div>
     <c:forEach var="i" items="${requestScope.cars}">
-        <p>price: ${i.price}<br>Number: ${i.number}<br>Amount: ${i.regions.size()}</p>
-        <hr>
+        <p>price: ${i.price}</p>
+        <p>Number: ${i.number}</p>
     </c:forEach>
 </div>
-<div><a href="${pageContext.request.contextPath}">To Home</a></div>
+<%@ include file="footer.jsp"%>
 </body>
 </html>

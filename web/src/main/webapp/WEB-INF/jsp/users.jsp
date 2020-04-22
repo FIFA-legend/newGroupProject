@@ -15,11 +15,10 @@
 <body>
 <div>
     <c:forEach var="i" items="${requestScope.users}">
-        <p>Name: ${i.name}<br>Surname: ${i.surname}<br>Role: ${i.role}</p>
-        <hr>
+        <p>Name: ${i.name}</p>
+        <p>Surname: ${i.surname}</p>
+        <p>Role: ${i.role}</p>
     </c:forEach>
-</div>
-<div><a href="${pageContext.request.contextPath}">To Home</a></div>
-</body>
+<%@ include file="footer.jsp"%>
 </html>
 
