@@ -11,13 +11,17 @@
 <html>
 <head>
     <title>User's List</title>
+    <style>
+        <%@ include file="../css/style.css"%>
+    </style>
 </head>
 <body>
-<div>
+<div class="center">
     <c:forEach var="i" items="${requestScope.users}">
         <p>Name: ${i.name}</p>
         <p>Surname: ${i.surname}</p>
         <p>Role: ${i.role}</p>
+        <hr>
     </c:forEach>
 <%@ include file="footer.jsp"%>
 </html>

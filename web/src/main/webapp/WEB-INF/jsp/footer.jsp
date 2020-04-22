@@ -9,10 +9,13 @@
 <html>
 <head>
     <title>Footer</title>
+    <style>
+        <%@ include file="../css/style.css"%>
+    </style>
 </head>
 <body>
 </div>
-<div><a href="${pageContext.request.contextPath}/index.jsp">To Home</a></div>
+<div><a href="${pageContext.request.contextPath}/index.jsp" class="home">To Home</a></div>
 </body>
 </body>
 </html>

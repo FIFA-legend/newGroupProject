@@ -3,13 +3,16 @@
 <html>
   <head>
     <title>Home</title>
+    <style>
+      <%@ include file="WEB-INF/css/style.css"%>
+    </style>
   </head>
   <body>
 <p>
-  <a href="${pageContext.request.contextPath}/users">Show all users</a>
+  <a href="${pageContext.request.contextPath}/users" class="check-all">Show all users</a>
 </p>
 <p>
-  <a href="${pageContext.request.contextPath}/cars">Show all cars</a>
+  <a href="${pageContext.request.contextPath}/cars" class="check-all">Show all cars</a>
 </p>
   </body>
 </html>

@@ -1,0 +1,45 @@
+a{
+    text-decoration: none;
+}
+*{
+    color: rgba(125,134,142,1);
+    font-family: "Open Sans - Semibold", sans-serif;
+}
+
+hr{
+    margin: 20px;
+}
+
+.home{
+    display: block;
+    width: 121px;
+    height: 46px;
+    background-color: #ff8b38;
+    color: #ffffff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: "Open Sans - Semibold",sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 46px;
+    text-align: center;
+    transition: all .3s;
+    margin-left: 43%;
+}
+.home:hover{
+    background-color: #333333;
+}
+
+.check-all{
+    transition: .3s;
+}
+
+.check-all:hover{
+    color: black;
+    text-decoration: underline;
+}
+
+.center{
+    text-align: center;
+}

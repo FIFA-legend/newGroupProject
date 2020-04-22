@@ -11,12 +11,16 @@
 <html>
 <head>
     <title>Car's list</title>
+    <style>
+        <%@ include file="../css/style.css"%>
+    </style>
 </head>
 <body>
-<div>
+<div class="center">
     <c:forEach var="i" items="${requestScope.cars}">
         <p>price: ${i.price}</p>
         <p>Number: ${i.number}</p>
+        <hr>
     </c:forEach>
 </div>
 <%@ include file="footer.jsp"%>
