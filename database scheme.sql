@@ -5,12 +5,8 @@ USE project_park;
 CREATE TABLE cars
 (
     id BIGINT AUTO_INCREMENT,
-    DTYPE VARCHAR(50) NOT NULL,
     number VARCHAR(50) NOT NULL,
     price double NOT NULL,
-    comfort VARCHAR(50) NULL,
-    carrying INT NULL,
-    capacity INT NULL,
     PRIMARY KEY(id)
 );
 
@@ -55,4 +51,29 @@ CREATE TABLE requests
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
+CREATE TABLE buses
+(
+	id BIGINT NOT NULL,
+    capacity INT NOT NULL,
+	PRIMARY KEY(id),
+    CONSTRAINT FKdd2jtbmdjv8ml664vn6kpv7jl
+    FOREIGN KEY (id) REFERENCES cars (id)
+);
 
+CREATE TABLE taxis
+(
+	id BIGINT NOT NULL,
+    comfort VARCHAR(50) NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT FKq4d4tn221mjpx9ms4txu16vo7
+    FOREIGN KEY (id) REFERENCES cars (id)
+);
+
+CREATE TABLE trucks
+(
+	id BIGINT NOT NULL,
+    carrying INT NOT NULL,
+	PRIMARY KEY(id),
+    CONSTRAINT FKd3w0me9aiclfh9leutlxr1icq
+    FOREIGN KEY (id) REFERENCES cars (id)
+);

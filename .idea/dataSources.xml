@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="project_park@localhost" uuid="70115057-47ac-4aec-b0c5-53e2275f6a2e">
+    <data-source source="LOCAL" name="project_park@localhost" uuid="92344a42-3af0-47c5-a4ff-7da0634c72ca">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
@@ -9,46 +9,6 @@
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate1" uuid="d08ef58c-7db6-434b-97e2-1398df755cac">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-D:/privet/newGroupProject/database/src/main/resources/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/project_park?serverTimezone=UTC</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="b6fe1487-76bb-4296-ab12-e37437bfaef5">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-D:/privet/newGroupProject/database/target/classes/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/project_park?serverTimezone=UTC</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="0761424f-942e-49e9-9d81-729a2c70211d">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-D:/privet/newGroupProject/database/src/main/resources/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/project_park?serverTimezone=UTC</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="6656e476-2328-414a-8da8-b48bb7ef74cf">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-D:/privet/newGroupProject/database/src/main/resources/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/project_park?serverTimezone=UTC</jdbc-url>
     </data-source>
   </component>
 </project>

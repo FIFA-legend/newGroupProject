@@ -1,6 +1,5 @@
 package by.clowns.dao;
 
-import by.clowns.entity.Car;
 import by.clowns.entity.Taxi;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;

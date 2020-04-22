@@ -1,6 +1,5 @@
 package by.clowns.dao;
 
-import by.clowns.entity.Region;
 import by.clowns.entity.Request;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;

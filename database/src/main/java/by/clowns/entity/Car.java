@@ -15,6 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cars")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Car extends BaseEntity {
 
     @Column(name = "price")
