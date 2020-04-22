@@ -8,10 +8,10 @@
         <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/project_park?serverTimezone=UTC</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">0987654321KnKn</property>
+        <property name="connection.password">кщще</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <mapping class="by.clowns.entity.User"/>
         <mapping class="by.clowns.entity.Taxi"/>

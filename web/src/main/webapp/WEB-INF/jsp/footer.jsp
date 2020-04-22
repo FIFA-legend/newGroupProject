@@ -14,8 +14,8 @@
     </style>
 </head>
 <body>
-</div>
-<div><a href="${pageContext.request.contextPath}/index.jsp" class="home">To Home</a></div>
-</body>
+    <div>
+        <a href="${pageContext.request.contextPath}/index.jsp" class="home">To Home</a>
+    </div>
 </body>
 </html>
