@@ -25,4 +25,8 @@ public class Region extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "car_id")
     )
     private Set<Car> cars;
+
+    @Version
+    @Column(name = "version")
+    private Long version;
 }

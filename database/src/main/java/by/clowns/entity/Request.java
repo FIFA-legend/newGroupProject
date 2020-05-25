@@ -22,6 +22,10 @@ public class Request extends BaseEntity {
     @JoinColumn(name = "car_id")
     private Car car;
 
+    @Version
+    @Column(name = "version")
+    private Long version;
+
     public Request(User user, Car car) {
         this.user = user;
         this.car = car;

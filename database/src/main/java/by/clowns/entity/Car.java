@@ -30,6 +30,10 @@ public class Car extends BaseEntity {
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER)
     private Request request;
 
+    @Version
+    @Column(name = "version")
+    private Long version;
+
     public Car(double price, String number) {
         this.price = price;
         this.number = number;

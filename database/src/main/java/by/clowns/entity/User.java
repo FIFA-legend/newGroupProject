@@ -30,6 +30,10 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Request> requests;
 
+    @Version
+    @Column(name = "version")
+    private Long version;
+
     public User(String name, String surname, Passport passport, Role role) {
         this.name = name;
         this.surname = surname;
