@@ -1,18 +1,20 @@
 package by.clowns.dao;
 
+import by.clowns.entity.BaseEntity;
+
 import java.util.Set;
 
-public interface Dao <T> {
+public interface Dao <T extends BaseEntity> {
 
-    void create(T entity);
+    void save(T entity);
 
-    Set<T> read();
+    Set<T> findAll();
 
     void update(T entity, long id);
 
     void delete(long id);
 
-    T get(long id);
+    T findById(long id);
 
     void close();
 }

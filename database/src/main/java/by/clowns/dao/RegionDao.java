@@ -7,11 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public class RegionDao implements Dao<Region> {
 
     static SessionFactory SESSION_FACTORY;
@@ -29,7 +31,7 @@ public class RegionDao implements Dao<Region> {
     }
 
     @Override
-    public void create(Region entity) {
+    public void save(Region entity) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -40,7 +42,7 @@ public class RegionDao implements Dao<Region> {
     }
 
     @Override
-    public Set<Region> read() {
+    public Set<Region> findAll() {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -80,7 +82,7 @@ public class RegionDao implements Dao<Region> {
     }
 
     @Override
-    public Region get(long id) {
+    public Region findById(long id) {
         Session session = SESSION_FACTORY.openSession();
 
         Region region = session.get(Region.class, id);

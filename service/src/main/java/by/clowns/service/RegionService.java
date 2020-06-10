@@ -22,14 +22,14 @@ public class RegionService implements Service<Region> {
     @Override
     public void create(Region entity) {
         Dao<Region> dao = RegionDao.getInstance();
-        dao.create(entity);
+        dao.save(entity);
         dao.close();
     }
 
     @Override
     public Set<Region> read() {
         Dao<Region> dao = RegionDao.getInstance();
-        Set<Region> set = dao.read();
+        Set<Region> set = dao.findAll();
         dao.close();
         return set;
     }
@@ -51,7 +51,7 @@ public class RegionService implements Service<Region> {
     @Override
     public Region get(long id) {
         Dao<Region> dao = RegionDao.getInstance();
-        Region entity = dao.get(id);
+        Region entity = dao.findById(id);
         dao.close();
         return entity;
     }

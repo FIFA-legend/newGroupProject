@@ -22,14 +22,14 @@ public class RequestService implements Service<Request> {
     @Override
     public void create(Request entity) {
         Dao<Request> dao = RequestDao.getInstance();
-        dao.create(entity);
+        dao.save(entity);
         dao.close();
     }
 
     @Override
     public Set<Request> read() {
         Dao<Request> dao = RequestDao.getInstance();
-        Set<Request> set = dao.read();
+        Set<Request> set = dao.findAll();
         dao.close();
         return set;
     }
@@ -51,7 +51,7 @@ public class RequestService implements Service<Request> {
     @Override
     public Request get(long id) {
         Dao<Request> dao = RequestDao.getInstance();
-        Request entity = dao.get(id);
+        Request entity = dao.findById(id);
         dao.close();
         return entity;
     }

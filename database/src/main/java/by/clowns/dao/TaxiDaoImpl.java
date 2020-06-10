@@ -1,37 +1,30 @@
 package by.clowns.dao;
 
-import by.clowns.entity.Car;
+import by.clowns.entity.Taxi;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Repository
-public class CarDao implements Dao<Car> {
+//@Repository
+public class TaxiDaoImpl implements TaxiDao {
 
-    static SessionFactory SESSION_FACTORY;
+    private SessionFactory sessionFactory;
 
-    private static CarDao INSTANCE = null;
-
-    private CarDao(){}
-
-    public static CarDao getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new CarDao();
-        }
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-        return INSTANCE;
+    //@Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public void save(Car entity) {
-        Session session = SESSION_FACTORY.openSession();
+    public void save(Taxi entity) {
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         session.save(entity);
@@ -41,11 +34,11 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public Set<Car> findAll() {
-        Session session = SESSION_FACTORY.openSession();
+    public Set<Taxi> findAll() {
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        List<Car> cars = session.createQuery("SELECT a FROM Car a", Car.class).getResultList();
+        List<Taxi> cars = session.createQuery("SELECT a FROM Taxi a", Taxi.class).getResultList();
 
         transaction.commit();
         session.close();
@@ -54,17 +47,18 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public void update(Car entity, long id) {
-        Session session = SESSION_FACTORY.openSession();
+    public void update(Taxi entity, long id) {
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Car car = session.get(Car.class, id);
+        Taxi car = session.get(Taxi.class, id);
         session.replicate(car, ReplicationMode.OVERWRITE);
 
         car.setPrice(entity.getPrice());
         car.setNumber(entity.getNumber());
         car.setRegions(entity.getRegions());
         car.setRequest(entity.getRequest());
+        car.setComfort(entity.getComfort());
 
         transaction.commit();
         session.close();
@@ -72,10 +66,10 @@ public class CarDao implements Dao<Car> {
 
     @Override
     public void delete(long id) {
-        Session session = SESSION_FACTORY.openSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        Car car = session.get(Car.class, id);
+        Taxi car = session.get(Taxi.class, id);
         session.delete(car);
 
         transaction.commit();
@@ -83,10 +77,10 @@ public class CarDao implements Dao<Car> {
     }
 
     @Override
-    public Car findById(long id) {
-        Session session = SESSION_FACTORY.openSession();
+    public Taxi findById(long id) {
+        Session session = sessionFactory.openSession();
 
-        Car car = session.get(Car.class, id);
+        Taxi car = session.get(Taxi.class, id);
 
         session.close();
         return car;
@@ -94,6 +88,6 @@ public class CarDao implements Dao<Car> {
 
     @Override
     public void close() {
-        SESSION_FACTORY.close();
+        sessionFactory.close();
     }
 }

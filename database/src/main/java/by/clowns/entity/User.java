@@ -40,4 +40,12 @@ public class User extends BaseEntity {
         this.passport = passport;
         this.role = role;
     }
+
+    public User(String name, String surname, Passport passport, Role role, Set<Request> requests) {
+        this.name = name;
+        this.surname = surname;
+        this.passport = passport;
+        this.role = role;
+        this.requests = requests;
+    }
 }

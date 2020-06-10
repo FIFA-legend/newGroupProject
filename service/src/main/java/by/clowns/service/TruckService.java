@@ -22,14 +22,14 @@ public class TruckService implements Service<Truck> {
     @Override
     public void create(Truck entity) {
         Dao<Truck> dao = TruckDao.getInstance();
-        dao.create(entity);
+        dao.save(entity);
         dao.close();
     }
 
     @Override
     public Set<Truck> read() {
         Dao<Truck> dao = TruckDao.getInstance();
-        Set<Truck> set = dao.read();
+        Set<Truck> set = dao.findAll();
         dao.close();
         return set;
     }
@@ -51,7 +51,7 @@ public class TruckService implements Service<Truck> {
     @Override
     public Truck get(long id) {
         Dao<Truck> dao = TruckDao.getInstance();
-        Truck entity = dao.get(id);
+        Truck entity = dao.findById(id);
         dao.close();
         return entity;
     }

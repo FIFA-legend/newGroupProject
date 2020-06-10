@@ -1,12 +1,17 @@
 package by.clowns.service;
 
-import by.clowns.dao.Dao;
-import by.clowns.dao.UserDao;
+import by.clowns.dao.UserRepository;
 import by.clowns.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class UserService implements Service<User> {
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
 
     private UserService(){}
 
@@ -19,40 +24,24 @@ public class UserService implements Service<User> {
         return INSTANCE;
     }
 
-    @Override
     public void create(User entity) {
-        Dao<User> dao = UserDao.getInstance();
-        dao.create(entity);
-        dao.close();
+        userRepository.save(entity);
     }
 
-    @Override
     public Set<User> read() {
-        Dao<User> dao = UserDao.getInstance();
-        Set<User> set = dao.read();
-        dao.close();
-        return set;
+        List<User> list = userRepository.findAll();
+        return new TreeSet<>(list);
     }
 
-    @Override
     public void update(User entity, long id) {
-        Dao<User> dao = UserDao.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        userRepository.save(entity);
     }
 
-    @Override
     public void delete(long id) {
-        Dao<User> dao = UserDao.getInstance();
-        dao.delete(id);
-        dao.close();
+        userRepository.deleteById(id);
     }
 
-    @Override
     public User get(long id) {
-        Dao<User> dao = UserDao.getInstance();
-        User entity = dao.get(id);
-        dao.close();
-        return entity;
+        return userRepository.findById(id);
     }
 }

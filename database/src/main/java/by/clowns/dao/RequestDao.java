@@ -6,11 +6,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public class RequestDao implements Dao<Request> {
 
     static SessionFactory SESSION_FACTORY;
@@ -28,7 +30,7 @@ public class RequestDao implements Dao<Request> {
     }
 
     @Override
-    public void create(Request entity) {
+    public void save(Request entity) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -39,7 +41,7 @@ public class RequestDao implements Dao<Request> {
     }
 
     @Override
-    public Set<Request> read() {
+    public Set<Request> findAll() {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -80,7 +82,7 @@ public class RequestDao implements Dao<Request> {
     }
 
     @Override
-    public Request get(long id) {
+    public Request findById(long id) {
         Session session = SESSION_FACTORY.openSession();
 
         Request request = session.get(Request.class, id);

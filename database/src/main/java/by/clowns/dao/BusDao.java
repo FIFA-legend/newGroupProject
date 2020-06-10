@@ -6,11 +6,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public class BusDao implements Dao<Bus> {
 
     static SessionFactory SESSION_FACTORY;
@@ -28,7 +30,7 @@ public class BusDao implements Dao<Bus> {
     }
 
     @Override
-    public void create(Bus entity) {
+    public void save(Bus entity) {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -39,7 +41,7 @@ public class BusDao implements Dao<Bus> {
     }
 
     @Override
-    public Set<Bus> read() {
+    public Set<Bus> findAll() {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -82,7 +84,7 @@ public class BusDao implements Dao<Bus> {
     }
 
     @Override
-    public Bus get(long id) {
+    public Bus findById(long id) {
         Session session = SESSION_FACTORY.openSession();
 
         Bus car = session.get(Bus.class, id);

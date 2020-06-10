@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="project_park@localhost" uuid="92344a42-3af0-47c5-a4ff-7da0634c72ca">
+    <data-source source="LOCAL" name="project_park@localhost" uuid="51f94666-8d12-4303-a550-03ff812d41f8">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
@@ -9,16 +9,6 @@
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="5aa7fef2-d7a2-4b47-bdd3-27e31a82c910">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-D:/privet/newGroupProject/database/src/main/resources/hibernate.cfg.xml</remarks>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/project_park?serverTimezone=UTC</jdbc-url>
     </data-source>
   </component>
 </project>
