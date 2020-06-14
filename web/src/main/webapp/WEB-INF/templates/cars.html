@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car's list</title>
+</head>
+<body>
+    <div th:align="center" th:object="${cars}">
+        <li th:each="car : ${cars}">
+            <label for="price">Price: </label>
+            <span th:text="${car.price}" id="price"></span> <br>
+            <label for="number">Number: </label>
+            <span th:text="${car.number}" id="number"></span> <br>
+            <hr>
+        </li>
+        <a th:href="@{/}" class="home">To Home</a>
+    </div>
+</body>
+</html>
