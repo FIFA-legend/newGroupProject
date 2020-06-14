@@ -1,58 +1,53 @@
 package by.clowns.service;
 
-import by.clowns.dao.BusDao;
-import by.clowns.dao.Dao;
+import by.clowns.dao.BusRepository;
 import by.clowns.entity.Bus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class BusService implements Service<Bus> {
+@Service
+public class BusService implements ServiceInterface<Bus> {
 
-    private BusService(){}
+    private final BusRepository busRepository;
 
-    private static BusService INSTANCE = null;
-
-    public static BusService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new BusService();
-        }
-        return INSTANCE;
+    @Autowired
+    public BusService(BusRepository busRepository) {
+        this.busRepository = busRepository;
     }
 
     @Override
     public void create(Bus entity) {
-        Dao<Bus> dao = BusDao.getInstance();
-        dao.save(entity);
-        dao.close();
+        busRepository.save(entity);
     }
 
     @Override
     public Set<Bus> read() {
-        Dao<Bus> dao = BusDao.getInstance();
-        Set<Bus> set = dao.findAll();
-        dao.close();
-        return set;
+        List<Bus> busList = busRepository.findAll();
+        return new HashSet<>(busList);
     }
 
     @Override
     public void update(Bus entity, long id) {
-        Dao<Bus> dao = BusDao.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        Bus busToUpdate = busRepository.findById(id);
+        busToUpdate.setCapacity(entity.getCapacity());
+        busToUpdate.setNumber(entity.getNumber());
+        busToUpdate.setPrice(entity.getPrice());
+        busToUpdate.setRegions(entity.getRegions());
+        busToUpdate.setRequest(entity.getRequest());
+        busRepository.save(busToUpdate);
     }
 
     @Override
     public void delete(long id) {
-        Dao<Bus> dao = BusDao.getInstance();
-        dao.delete(id);
-        dao.close();
+        busRepository.deleteById(id);
     }
 
     @Override
     public Bus get(long id) {
-        Dao<Bus> dao = BusDao.getInstance();
-        Bus entity = dao.findById(id);
-        dao.close();
-        return entity;
+        return busRepository.findById(id);
     }
 }

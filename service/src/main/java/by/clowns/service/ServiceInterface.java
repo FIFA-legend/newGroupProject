@@ -2,7 +2,8 @@ package by.clowns.service;
 
 import java.util.Set;
 
-public interface Service <T> {
+public interface ServiceInterface<T> {
+
     void create(T entity);
 
     Set<T> read();
@@ -12,4 +13,5 @@ public interface Service <T> {
     void delete(long id);
 
     T get(long id);
+
 }

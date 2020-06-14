@@ -14,20 +14,31 @@
     <packaging>war</packaging>
 
     <dependencies>
+
         <dependency>
             <groupId>by.clowns</groupId>
             <artifactId>service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
             <version>8.5.51</version>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+
     </dependencies>
 </project>

@@ -17,7 +17,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { DaoConfiguration.class, UserRepository.class })
+@ContextConfiguration(classes = { DaoConfiguration.class })
 public class UserTests {
 
     @Autowired
@@ -29,9 +29,11 @@ public class UserTests {
         User user1 = new User("Nikita", "Kolodko", passport, Role.ADMIN);
         User user2 = new User("Name", "Surname", passport, Role.CLIENT);
         User user3 = new User("Lionel", "Messi", passport, Role.CLIENT);
+        User user4 = new User("Alessandro", "Pirlo", passport, Role.CLIENT);
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
+        userRepository.save(user4);
     }
 
     @Test
@@ -50,7 +52,16 @@ public class UserTests {
     public void deleteByIdTest() {
         userRepository.deleteById(3L);
         List<User> usersLeft = userRepository.findAll();
-        Assert.assertEquals(usersLeft.size(), 2);
+        Assert.assertEquals(usersLeft.size(), 3);
+    }
+
+    @Test
+    public void updateTest() {
+        User foundUser = userRepository.findById(4L);
+        foundUser.setName("Andrea");
+        userRepository.save(foundUser);
+        User secondTimeFound = userRepository.findById(4L);
+        Assert.assertEquals(secondTimeFound.getName(), "Andrea");
     }
 
 }

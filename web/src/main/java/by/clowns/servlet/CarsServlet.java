@@ -1,8 +1,9 @@
 package by.clowns.servlet;
 
 import by.clowns.entity.Car;
-import by.clowns.service.CarService;
-import by.clowns.service.Service;
+import by.clowns.entity.Truck;
+import by.clowns.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +15,18 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/cars", name = "CarsServlet")
 public class CarsServlet extends HttpServlet {
 
+    @Autowired
+    private BusService busService;
+
+    @Autowired
+    private TruckService truckService;
+
+    @Autowired
+    private TaxiService taxiService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Service<Car> service = CarService.getInstance();
-        req.setAttribute("cars", service.read());
+        req.setAttribute("cars", taxiService.read());
         req.getRequestDispatcher("/WEB-INF/jsp/cars.jsp").forward(req, resp);
     }
 }

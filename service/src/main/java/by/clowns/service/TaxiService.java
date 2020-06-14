@@ -1,58 +1,54 @@
 package by.clowns.service;
 
 import by.clowns.dao.Dao;
-import by.clowns.dao.TaxiDaoImpl;
+import by.clowns.dao.TaxiRepository;
 import by.clowns.entity.Taxi;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class TaxiService  {
+@Service
+public class TaxiService implements ServiceInterface<Taxi> {
 
-    /*private TaxiService(){}
+    private final TaxiRepository taxiRepository;
 
-    private static TaxiService INSTANCE = null;
-
-    public static TaxiService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new TaxiService();
-        }
-        return INSTANCE;
+    @Autowired
+    public TaxiService(TaxiRepository taxiRepository) {
+        this.taxiRepository = taxiRepository;
     }
 
     @Override
     public void create(Taxi entity) {
-        Dao<Taxi> dao = TaxiDaoImpl.getInstance();
-        dao.save(entity);
-        dao.close();
+        taxiRepository.save(entity);
     }
 
     @Override
     public Set<Taxi> read() {
-        Dao<Taxi> dao = TaxiDaoImpl.getInstance();
-        Set<Taxi> set = dao.findAll();
-        dao.close();
-        return set;
+        List<Taxi> taxiList = taxiRepository.findAll();
+        return new HashSet<>(taxiList);
     }
 
     @Override
     public void update(Taxi entity, long id) {
-        Dao<Taxi> dao = TaxiDaoImpl.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        Taxi taxiToChange = taxiRepository.findById(id);
+        taxiToChange.setComfort(entity.getComfort());
+        taxiToChange.setNumber(entity.getNumber());
+        taxiToChange.setPrice(entity.getPrice());
+        taxiToChange.setRegions(entity.getRegions());
+        taxiToChange.setRequest(entity.getRequest());
+        taxiRepository.save(taxiToChange);
     }
 
     @Override
     public void delete(long id) {
-        Dao<Taxi> dao = TaxiDaoImpl.getInstance();
-        dao.delete(id);
-        dao.close();
+        taxiRepository.deleteById(id);
     }
 
     @Override
     public Taxi get(long id) {
-        Dao<Taxi> dao = TaxiDaoImpl.getInstance();
-        Taxi entity = dao.findById(id);
-        dao.close();
-        return entity;
-    }*/
+        return taxiRepository.findById(id);
+    }
 }

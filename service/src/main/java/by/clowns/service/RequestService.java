@@ -1,58 +1,50 @@
 package by.clowns.service;
 
-import by.clowns.dao.Dao;
-import by.clowns.dao.RequestDao;
+import by.clowns.dao.RequestRepository;
 import by.clowns.entity.Request;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class RequestService implements Service<Request> {
+@Service
+public class RequestService implements ServiceInterface<Request> {
 
-    private RequestService(){}
+    private final RequestRepository requestRepository;
 
-    private static RequestService INSTANCE = null;
-
-    public static RequestService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new RequestService();
-        }
-        return INSTANCE;
+    @Autowired
+    public RequestService(RequestRepository requestRepository) {
+        this.requestRepository = requestRepository;
     }
 
     @Override
     public void create(Request entity) {
-        Dao<Request> dao = RequestDao.getInstance();
-        dao.save(entity);
-        dao.close();
+        requestRepository.save(entity);
     }
 
     @Override
     public Set<Request> read() {
-        Dao<Request> dao = RequestDao.getInstance();
-        Set<Request> set = dao.findAll();
-        dao.close();
-        return set;
+        List<Request> requestList = requestRepository.findAll();
+        return new HashSet<>(requestList);
     }
 
     @Override
     public void update(Request entity, long id) {
-        Dao<Request> dao = RequestDao.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        Request requestToUpdate = requestRepository.findById(id);
+        requestToUpdate.setCar(entity.getCar());
+        requestToUpdate.setUser(entity.getUser());
+        requestRepository.save(requestToUpdate);
     }
 
     @Override
     public void delete(long id) {
-        Dao<Request> dao = RequestDao.getInstance();
-        dao.delete(id);
-        dao.close();
+        requestRepository.deleteById(id);
     }
 
     @Override
     public Request get(long id) {
-        Dao<Request> dao = RequestDao.getInstance();
-        Request entity = dao.findById(id);
-        dao.close();
-        return entity;
+        return requestRepository.findById(id);
     }
 }

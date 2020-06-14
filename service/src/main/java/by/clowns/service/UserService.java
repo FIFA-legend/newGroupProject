@@ -3,26 +3,23 @@ package by.clowns.service;
 import by.clowns.dao.UserRepository;
 import by.clowns.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    private UserService(){}
-
-    private static UserService INSTANCE = null;
-
-    public static UserService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new UserService();
-        }
-        return INSTANCE;
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
+
 
     public void create(User entity) {
         userRepository.save(entity);
@@ -30,11 +27,17 @@ public class UserService {
 
     public Set<User> read() {
         List<User> list = userRepository.findAll();
-        return new TreeSet<>(list);
+        return new HashSet<>(list);
     }
 
     public void update(User entity, long id) {
-        userRepository.save(entity);
+        User foundUser = userRepository.findById(id);
+        foundUser.setName(entity.getName());
+        foundUser.setSurname(entity.getSurname());
+        foundUser.setPassport(entity.getPassport());
+        foundUser.setRole(entity.getRole());
+        foundUser.setRequests(entity.getRequests());
+        userRepository.save(foundUser);
     }
 
     public void delete(long id) {

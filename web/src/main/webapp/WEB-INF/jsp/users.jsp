@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="center">
-    <c:forEach var="i" items="${requestScope.users}">
+    <c:forEach var="i" items="${users}">
         <p>Name: ${i.name}</p>
         <p>Surname: ${i.surname}</p>
         <p>Role: ${i.role}</p>

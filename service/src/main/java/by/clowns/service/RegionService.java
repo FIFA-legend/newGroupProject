@@ -1,58 +1,51 @@
 package by.clowns.service;
 
 import by.clowns.dao.Dao;
-import by.clowns.dao.RegionDao;
+import by.clowns.dao.RegionRepository;
 import by.clowns.entity.Region;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class RegionService implements Service<Region> {
+@Service
+public class RegionService implements ServiceInterface<Region> {
 
-    private RegionService(){}
+    private final RegionRepository regionRepository;
 
-    private static RegionService INSTANCE = null;
-
-    public static RegionService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new RegionService();
-        }
-        return INSTANCE;
+    @Autowired
+    public RegionService(RegionRepository regionRepository) {
+        this.regionRepository = regionRepository;
     }
 
     @Override
     public void create(Region entity) {
-        Dao<Region> dao = RegionDao.getInstance();
-        dao.save(entity);
-        dao.close();
+        regionRepository.save(entity);
     }
 
     @Override
     public Set<Region> read() {
-        Dao<Region> dao = RegionDao.getInstance();
-        Set<Region> set = dao.findAll();
-        dao.close();
-        return set;
+        List<Region> regionList = regionRepository.findAll();
+        return new HashSet<>(regionList);
     }
 
     @Override
     public void update(Region entity, long id) {
-        Dao<Region> dao = RegionDao.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        Region regionToUpdate = regionRepository.findById(id);
+        regionToUpdate.setName(entity.getName());
+        regionToUpdate.setCars(entity.getCars());
+        regionRepository.save(regionToUpdate);
     }
 
     @Override
     public void delete(long id) {
-        Dao<Region> dao = RegionDao.getInstance();
-        dao.delete(id);
-        dao.close();
+        regionRepository.deleteById(id);
     }
 
     @Override
     public Region get(long id) {
-        Dao<Region> dao = RegionDao.getInstance();
-        Region entity = dao.findById(id);
-        dao.close();
-        return entity;
+        return regionRepository.findById(id);
     }
 }

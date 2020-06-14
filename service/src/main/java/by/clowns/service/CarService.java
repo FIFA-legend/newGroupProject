@@ -6,7 +6,7 @@ import by.clowns.entity.Car;
 
 import java.util.Set;
 
-public class CarService implements Service<Car> {
+public class CarService implements ServiceInterface<Car> {
 
     private CarService(){}
 

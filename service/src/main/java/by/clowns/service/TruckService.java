@@ -1,58 +1,53 @@
 package by.clowns.service;
 
-import by.clowns.dao.Dao;
-import by.clowns.dao.TruckDao;
+import by.clowns.dao.TruckRepository;
 import by.clowns.entity.Truck;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class TruckService implements Service<Truck> {
+@Service
+public class TruckService implements ServiceInterface<Truck> {
 
-    private TruckService(){}
+    private final TruckRepository truckRepository;
 
-    private static TruckService INSTANCE = null;
-
-    public static TruckService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new TruckService();
-        }
-        return INSTANCE;
+    @Autowired
+    public TruckService(TruckRepository truckRepository) {
+        this.truckRepository = truckRepository;
     }
 
     @Override
     public void create(Truck entity) {
-        Dao<Truck> dao = TruckDao.getInstance();
-        dao.save(entity);
-        dao.close();
+        truckRepository.save(entity);
     }
 
     @Override
     public Set<Truck> read() {
-        Dao<Truck> dao = TruckDao.getInstance();
-        Set<Truck> set = dao.findAll();
-        dao.close();
-        return set;
+        List<Truck> truckList = truckRepository.findAll();
+        return new HashSet<>(truckList);
     }
 
     @Override
     public void update(Truck entity, long id) {
-        Dao<Truck> dao = TruckDao.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        Truck truckToChange = truckRepository.findById(id);
+        truckToChange.setCarrying(entity.getCarrying());
+        truckToChange.setNumber(entity.getNumber());
+        truckToChange.setPrice(entity.getPrice());
+        truckToChange.setRegions(entity.getRegions());
+        truckToChange.setRequest(entity.getRequest());
+        truckRepository.save(truckToChange);
     }
 
     @Override
     public void delete(long id) {
-        Dao<Truck> dao = TruckDao.getInstance();
-        dao.delete(id);
-        dao.close();
+        truckRepository.deleteById(id);
     }
 
     @Override
     public Truck get(long id) {
-        Dao<Truck> dao = TruckDao.getInstance();
-        Truck entity = dao.findById(id);
-        dao.close();
-        return entity;
+        return truckRepository.findById(id);
     }
 }
