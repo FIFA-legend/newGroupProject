@@ -1,49 +1,20 @@
 package by.clowns.service;
 
-import by.clowns.repository.UserRepository;
 import by.clowns.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Service
-public class UserService {
+public interface UserService extends UserDetailsService {
 
-    private UserRepository userRepository;
+    void create(User entity);
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    Set<User> read();
 
+    void update(User entity, long id);
 
-    public void create(User entity) {
-        userRepository.save(entity);
-    }
+    void delete(long id);
 
-    public Set<User> read() {
-        List<User> list = userRepository.findAll();
-        return new HashSet<>(list);
-    }
+    User get(long id);
 
-    public void update(User entity, long id) {
-        User foundUser = userRepository.findById(id);
-        foundUser.setName(entity.getName());
-        foundUser.setSurname(entity.getSurname());
-        foundUser.setPassport(entity.getPassport());
-        foundUser.setRole(entity.getRole());
-        foundUser.setRequests(entity.getRequests());
-        userRepository.save(foundUser);
-    }
-
-    public void delete(long id) {
-        userRepository.deleteById(id);
-    }
-
-    public User get(long id) {
-        return userRepository.findById(id);
-    }
 }

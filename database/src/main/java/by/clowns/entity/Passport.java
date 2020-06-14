@@ -17,6 +17,12 @@ import java.sql.Date;
 @Embeddable
 public class Passport {
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
     @Column(name = "passport_id")
     private String passportId;
 

@@ -18,8 +18,8 @@
 <body>
 <div class="center">
     <c:forEach var="i" items="${users}">
-        <p>Name: ${i.name}</p>
-        <p>Surname: ${i.surname}</p>
+        <p>Name: ${i.passport.name}</p>
+        <p>Surname: ${i.passport.surname}</p>
         <p>Role: ${i.role}</p>
         <hr>
     </c:forEach>

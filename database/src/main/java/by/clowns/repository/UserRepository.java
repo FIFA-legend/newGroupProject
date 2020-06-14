@@ -13,6 +13,8 @@ public interface UserRepository extends Repository<User, Long> {
 
     User findById(Long id);
 
+    User findByUsername(String username);
+
     List<User> findAll();
 
     void deleteById(Long id);

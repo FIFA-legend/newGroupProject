@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="center">
-    <c:forEach var="i" items="${requestScope.cars}">
+    <c:forEach var="i" items="${cars}">
         <p>price: ${i.price}</p>
         <p>Number: ${i.number}</p>
         <hr>

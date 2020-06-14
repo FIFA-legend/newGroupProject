@@ -1,5 +1,6 @@
 package by.clowns;
 
+import by.clowns.config.SecurityConfiguration;
 import by.clowns.config.ServiceConfiguration;
 import by.clowns.config.WebConfiguration;
 import by.clowns.configuration.DaoConfiguration;
@@ -14,7 +15,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { WebConfiguration.class, ServiceConfiguration.class, DaoConfiguration.class };
+        return new Class[] { WebConfiguration.class, ServiceConfiguration.class, DaoConfiguration.class, SecurityConfiguration.class };
     }
 
     @Override

@@ -15,11 +15,11 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "password")
+    private String password;
 
     private Passport passport;
 
@@ -34,16 +34,16 @@ public class User extends BaseEntity {
     @Column(name = "version")
     private Long version;
 
-    public User(String name, String surname, Passport passport, Role role) {
-        this.name = name;
-        this.surname = surname;
+    public User(String username, String password, Passport passport, Role role) {
+        this.username = username;
+        this.password = password;
         this.passport = passport;
         this.role = role;
     }
 
-    public User(String name, String surname, Passport passport, Role role, Set<Request> requests) {
-        this.name = name;
-        this.surname = surname;
+    public User(String username, String password, Passport passport, Role role, Set<Request> requests) {
+        this.username = username;
+        this.password = password;
         this.passport = passport;
         this.role = role;
         this.requests = requests;
