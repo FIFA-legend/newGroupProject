@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "by.clowns.dao")
+@EnableJpaRepositories(basePackages = "by.clowns.repository")
 @PropertySource("classpath:configuration.properties")
 public class DaoConfiguration {
 

@@ -1,7 +1,7 @@
 package by.clowns;
 
 import by.clowns.configuration.DaoConfiguration;
-import by.clowns.dao.UserRepository;
+import by.clowns.repository.UserRepository;
 import by.clowns.entity.Passport;
 import by.clowns.entity.Role;
 import by.clowns.entity.User;
@@ -17,7 +17,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { DaoConfiguration.class, UserRepository.class })
+@ContextConfiguration(classes = { DaoConfiguration.class})
 public class UserTests {
 
     @Autowired

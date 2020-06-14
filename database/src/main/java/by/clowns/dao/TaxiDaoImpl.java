@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 //@Repository
-public class TaxiDaoImpl implements TaxiDao {
+public class TaxiDaoImpl implements Dao<Taxi> {
 
     private SessionFactory sessionFactory;
 
