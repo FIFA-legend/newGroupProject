@@ -14,6 +14,7 @@ buildNumber.properties
 *database.iml
 *web.iml
 *.idea
+.idea/
 
 # Compiled class file
 *.class
