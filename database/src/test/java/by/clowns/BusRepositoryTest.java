@@ -4,7 +4,6 @@ import by.clowns.configuration.DaoConfiguration;
 
 import by.clowns.entity.Bus;
 import by.clowns.repository.BusRepository;
-import by.clowns.repository.CarRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,7 @@ import java.util.List;
 public class BusRepositoryTest {
 
     @Autowired
-    BusRepository busRepository;
+    private BusRepository busRepository;
 
     @Before
     public void init() {

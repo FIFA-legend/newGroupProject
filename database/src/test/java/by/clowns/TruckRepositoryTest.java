@@ -19,7 +19,7 @@ import java.util.List;
 public class TruckRepositoryTest {
 
     @Autowired
-    TruckRepository truckRepository;
+    private TruckRepository truckRepository;
 
     @Before
     public void init() {

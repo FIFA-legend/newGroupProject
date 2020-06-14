@@ -1,4 +1,4 @@
-package by.clowns.dao;
+package by.clowns.repository;
 
 import by.clowns.entity.Request;
 import org.springframework.data.repository.Repository;

@@ -1,58 +1,52 @@
 package by.clowns.service;
 
-import by.clowns.dao.CarDao;
-import by.clowns.dao.Dao;
 import by.clowns.entity.Car;
+import by.clowns.repository.CarRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+@Service
 public class CarService implements ServiceInterface<Car> {
 
-    private CarService(){}
+    private CarRepository carRepository;
 
-    private static CarService INSTANCE = null;
-
-    public static CarService getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new CarService();
-        }
-        return INSTANCE;
+    @Autowired
+    public CarService(CarRepository carRepository) {
+        this.carRepository = carRepository;
     }
 
     @Override
     public void create(Car entity) {
-        Dao<Car> dao = CarDao.getInstance();
-        dao.save(entity);
-        dao.close();
+        carRepository.save(entity);
     }
 
     @Override
     public Set<Car> read() {
-        Dao<Car> dao = CarDao.getInstance();
-        Set<Car> set = dao.findAll();
-        dao.close();
-        return set;
+        List<Car> carList = carRepository.findAll();
+        return new HashSet<>(carList);
     }
 
     @Override
     public void update(Car entity, long id) {
-        Dao<Car> dao = CarDao.getInstance();
-        dao.update(entity, id);
-        dao.close();
+        Car carToUpdate = carRepository.findById(id);
+        carToUpdate.setNumber(entity.getNumber());
+        carToUpdate.setPrice(entity.getPrice());
+        carToUpdate.setRegions(entity.getRegions());
+        carToUpdate.setRequest(entity.getRequest());
+        carRepository.save(carToUpdate);
     }
 
     @Override
     public void delete(long id) {
-        Dao<Car> dao = CarDao.getInstance();
-        dao.delete(id);
-        dao.close();
+        carRepository.deleteById(id);
     }
 
     @Override
     public Car get(long id) {
-        Dao<Car> dao = CarDao.getInstance();
-        Car entity = dao.findById(id);
-        dao.close();
-        return entity;
+        return carRepository.findById(id);
     }
 }

@@ -1,7 +1,6 @@
 package by.clowns.service;
 
-import by.clowns.dao.Dao;
-import by.clowns.dao.RegionRepository;
+import by.clowns.repository.RegionRepository;
 import by.clowns.entity.Region;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

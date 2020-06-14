@@ -3,6 +3,7 @@ package by.clowns;
 import by.clowns.configuration.DaoConfiguration;
 import by.clowns.entity.Car;
 import by.clowns.repository.CarRepository;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CarRepositoryTest {
 
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
 
     @Before
     public void init() {
@@ -49,4 +50,5 @@ public class CarRepositoryTest {
         List<Car> cars = carRepository.findAll();
         Assert.assertEquals(2, cars.size());
     }
+    
 }

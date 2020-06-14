@@ -1,6 +1,6 @@
 package by.clowns.service;
 
-import by.clowns.dao.BusRepository;
+import by.clowns.repository.BusRepository;
 import by.clowns.entity.Bus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

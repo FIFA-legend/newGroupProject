@@ -17,8 +17,9 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DaoConfiguration.class})
 public class TaxiRepositoryTest {
+
     @Autowired
-    TaxiRepository taxiRepository;
+    private TaxiRepository taxiRepository;
 
     @Before
     public void init() {
