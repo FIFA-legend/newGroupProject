@@ -1,6 +1,6 @@
 package by.clowns.controllers;
 
-import by.clowns.service.UserServiceImpl;
+import by.clowns.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UsersController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public UsersController(UserServiceImpl userService) {
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
 

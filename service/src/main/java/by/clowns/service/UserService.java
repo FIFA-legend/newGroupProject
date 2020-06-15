@@ -1,20 +1,73 @@
 package by.clowns.service;
 
+import by.clowns.repository.UserRepository;
 import by.clowns.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public interface UserService extends UserDetailsService {
+@Service
+public class UserService implements ServiceInterface<User>, UserDetailsService {
 
-    void create(User entity);
+    private UserRepository userRepository;
 
-    Set<User> read();
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    void update(User entity, long id);
+    @Override
+    public void create(User entity) {
+        userRepository.save(entity);
+    }
 
-    void delete(long id);
+    @Override
+    public Set<User> read() {
+        List<User> list = userRepository.findAll();
+        return new HashSet<>(list);
+    }
 
-    User get(long id);
+    @Override
+    public void update(User entity, long id) {
+        User foundUser = userRepository.findById(id);
+        foundUser.setUsername(entity.getUsername());
+        foundUser.setPassword(entity.getPassword());
+        foundUser.setPassport(entity.getPassport());
+        foundUser.setRole(entity.getRole());
+        foundUser.setRequests(entity.getRequests());
+        userRepository.save(foundUser);
+    }
+
+    @Override
+    public void delete(long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User get(long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), convertRoles(user));
+    }
+
+    private Collection<GrantedAuthority> convertRoles(User user) {
+        Set<GrantedAuthority> set = new HashSet<>();
+        set.add(new SimpleGrantedAuthority(user.getRole().toString()));
+        return set;
+    }
 
 }
+
