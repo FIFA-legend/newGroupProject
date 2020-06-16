@@ -1,8 +1,10 @@
 package by.clowns.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -12,14 +14,24 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "by.clowns.controllers")
+@PropertySource("classpath:config.properties")
 public class WebConfiguration {
+
+    @Value("${web.character.encoding}")
+    private String characterEncoding;
+
+    @Value("${web.prefix}")
+    private String prefix;
+
+    @Value("${web.suffix}")
+    private String suffix;
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding(characterEncoding);
+        templateResolver.setPrefix(prefix);
+        templateResolver.setSuffix(suffix);
         return templateResolver;
     }
 
@@ -34,7 +46,7 @@ public class WebConfiguration {
     @Bean
     public ViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setCharacterEncoding("UTF-8");
+        viewResolver.setCharacterEncoding(characterEncoding);
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }

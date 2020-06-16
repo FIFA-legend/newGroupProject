@@ -2,6 +2,7 @@ package by.clowns.service;
 
 import by.clowns.repository.UserRepository;
 import by.clowns.entity.User;
+import by.clowns.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

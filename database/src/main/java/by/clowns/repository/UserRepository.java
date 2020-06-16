@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+@Transactional  
 public interface UserRepository extends Repository<User, Long> {
 
     User save(User user);
