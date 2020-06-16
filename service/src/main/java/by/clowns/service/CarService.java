@@ -1,6 +1,7 @@
 package by.clowns.service;
 
 import by.clowns.entity.Car;
+import by.clowns.entity.Request;
 import by.clowns.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

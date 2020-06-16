@@ -1,6 +1,5 @@
 package by.clowns.repository;
 
-import by.clowns.entity.Car;
 import by.clowns.entity.Truck;
 import org.springframework.data.repository.Repository;
 import org.springframework.transaction.annotation.Transactional;
