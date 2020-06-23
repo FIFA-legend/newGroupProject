@@ -23,9 +23,9 @@ public class BusRepositoryTest {
 
     @Before
     public void init() {
-        Bus car1 = new Bus(13.5, "8888", 85);
-        Bus car2 = new Bus(15.5, "7777", 20);
-        Bus car3 = new Bus(1.5, "6666",1);
+        Bus car1 = new Bus("Mercedes", 13.5, "8888", 85);
+        Bus car2 = new Bus("Mercedes", 15.5, "7777", 20);
+        Bus car3 = new Bus("Mercedes", 1.5, "6666",1);
         busRepository.save(car1);
         busRepository.save(car2);
         busRepository.save(car3);

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taxi Registration</title>
+</head>
+<body>
+<div th:align="center">
+    <form th:action="@{/taxi/register}" th:method="post" th:object="${emptyTaxi}">
+        <label for="brand">Brand: </label>
+        <input type="text" th:field="*{brand}" id="brand"><br>
+        <label for="number">Number: </label>
+        <input type="text" th:field="*{number}" id="number"><br>
+        <label for="price">Price: </label>
+        <input type="number" th:field="*{price}" id="price"><br>
+        <ul style="list-style-type: none" id="roles">
+            <li th:each="comfort : ${comforts}">
+                <input type="radio" th:value="${comfort}" th:field="*{comfort}">
+                <span th:text="${#strings.capitalize(#strings.toLowerCase(comfort))}"></span>
+            </li>
+        </ul>
+        <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>

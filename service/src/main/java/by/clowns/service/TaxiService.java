@@ -1,5 +1,6 @@
 package by.clowns.service;
 
+import by.clowns.entity.Comfort;
 import by.clowns.repository.TaxiRepository;
 import by.clowns.entity.Taxi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,9 @@ public class TaxiService implements ServiceInterface<Taxi> {
     @Override
     public Taxi get(long id) {
         return taxiRepository.findById(id);
+    }
+
+    public Comfort[] getAllComforts() {
+        return Comfort.values();
     }
 }

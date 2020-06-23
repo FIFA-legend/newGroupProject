@@ -18,8 +18,8 @@ public class Taxi extends Car {
     @Column(name = "comfort")
     private Comfort comfort;
 
-    public Taxi(double price, String number, Comfort comfort) {
-        super(price, number);
+    public Taxi(String brand, double price, String number, Comfort comfort) {
+        super(brand, price, number);
         this.comfort = comfort;
     }
 }

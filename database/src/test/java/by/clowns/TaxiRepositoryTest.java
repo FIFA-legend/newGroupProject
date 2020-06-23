@@ -23,9 +23,9 @@ public class TaxiRepositoryTest {
 
     @Before
     public void init() {
-        Taxi car1 = new Taxi(13.5, "8888", Comfort.BUSINESS);
-        Taxi car2 = new Taxi(15.5, "7777", Comfort.ECONOMY);
-        Taxi car3 = new Taxi(1.5, "6666", Comfort.UBER_BLACK);
+        Taxi car1 = new Taxi("Mercedes", 13.5, "8888", Comfort.BUSINESS);
+        Taxi car2 = new Taxi("Mercedes", 15.5, "7777", Comfort.ECONOMY);
+        Taxi car3 = new Taxi("Mercedes", 1.5, "6666", Comfort.UBER_BLACK);
         taxiRepository.save(car1);
         taxiRepository.save(car2);
         taxiRepository.save(car3);

@@ -58,6 +58,10 @@ public class UserService implements ServiceInterface<User>, UserDetailsService {
         return userRepository.findById(id);
     }
 
+    public Role[] getAllRoles() {
+        return Role.values();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);

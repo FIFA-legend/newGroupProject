@@ -18,6 +18,9 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Car extends BaseEntity {
 
+    @Column(name = "brand")
+    private String brand;
+
     @Column(name = "price")
     private double price;
 
@@ -34,7 +37,8 @@ public class Car extends BaseEntity {
     @Column(name = "version")
     private Long version;
 
-    public Car(double price, String number) {
+    public Car(String brand, double price, String number) {
+        this.brand = brand;
         this.price = price;
         this.number = number;
     }

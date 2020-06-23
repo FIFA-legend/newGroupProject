@@ -23,9 +23,9 @@ public class TruckRepositoryTest {
 
     @Before
     public void init() {
-        Truck car1 = new Truck(13.5, "8888", 15);
-        Truck car2 = new Truck(15.5, "7777", 11);
-        Truck car3 = new Truck(1.5, "6666", 89);
+        Truck car1 = new Truck("Mercedes", 13.5, "8888", 15);
+        Truck car2 = new Truck("Mercedes", 15.5, "7777", 11);
+        Truck car3 = new Truck("Mercedes", 1.5, "6666", 89);
         truckRepository.save(car1);
         truckRepository.save(car2);
         truckRepository.save(car3);

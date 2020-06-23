@@ -19,8 +19,8 @@ public class Bus extends Car {
     @Column(name = "capacity")
     private int capacity;
 
-    public Bus(double price, String number, int capacity) {
-        super(price, number);
+    public Bus(String brand, double price, String number, int capacity) {
+        super(brand, price, number);
         this.capacity = capacity;
     }
 }
