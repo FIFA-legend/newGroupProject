@@ -1,5 +1,6 @@
 package by.clowns.controllers;
 
+import by.clowns.entity.Passport;
 import by.clowns.entity.Role;
 import by.clowns.entity.User;
 import by.clowns.service.UserService;
@@ -27,6 +28,11 @@ public class UserRegisterController {
         return new User();
     }
 
+    @ModelAttribute("passport")
+    public Passport emptyPassport() {
+        return new Passport();
+    }
+
     @ModelAttribute("roles")
     public Role[] allRoles() {
         return userService.getAllRoles();
@@ -38,9 +44,10 @@ public class UserRegisterController {
     }
 
     @PostMapping("/user/register")
-    public String getRegister(@Valid User user, Errors errors) {
-        System.out.println(errors.getErrorCount());
-        if (errors.hasErrors()) return "registrationPage";
+    public String getRegister(@Valid User user, Errors userErrors, @Valid Passport passport, Errors passportErrors) {
+        System.out.println(userErrors.getErrorCount());
+        if (userErrors.hasErrors() || passportErrors.hasErrors()) return "registrationPage";
+        user.setPassport(passport);
         userService.create(user);
         return "redirect:/login";
     }

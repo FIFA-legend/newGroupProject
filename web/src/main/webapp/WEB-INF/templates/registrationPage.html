@@ -13,18 +13,20 @@
             <label th:for="password">Password: </label>
             <input type="password" th:field="*{password}"><br>
             <p th:each="err : ${#fields.errors('password')}" style="color: darkred;" th:text="#{${err}}"></p>
-            <label th:for="passport.name">Real name: </label>
-            <input type="text" th:field="*{passport.name}"><br>
-            <p th:each="err : ${#fields.errors('passport.name')}" style="color: darkred;" th:text="#{${err}}"></p>
-            <label th:for="passport.surname">Real surname: </label>
-            <input type="text" th:field="*{passport.surname}"><br>
-            <p th:each="err : ${#fields.errors('passport.surname')}" style="color: darkred;" th:text="#{${err}}"></p>
-            <label th:for="passport.birth">Date of birth: </label>
-            <input type="date" th:field="*{passport.birth}"><br>
-            <p th:each="err : ${#fields.errors('passport.birth')}" style="color: darkred;" th:text="#{${err}}"></p>
-            <label th:for="passport.passportId">Passport ID: </label>
-            <input type="text" th:field="*{passport.passportId}"><br>
-            <p th:each="err : ${#fields.errors('passport.passportId')}" style="color: darkred;" th:text="#{${err}}"></p>
+            <div th:object="${passport}">
+                <label th:for="passport.name">Real name: </label>
+                <input type="text" th:field="*{name}"><br>
+                <p th:each="err : ${#fields.errors('name')}" style="color: darkred;" th:text="#{${err}}"></p>
+                <label th:for="passport.surname">Real surname: </label>
+                <input type="text" th:field="*{surname}"><br>
+                <p th:each="err : ${#fields.errors('surname')}" style="color: darkred;" th:text="#{${err}}"></p>
+                <label th:for="passport.birth">Date of birth: </label>
+                <input type="date" th:field="*{birth}"><br>
+                <p th:each="err : ${#fields.errors('birth')}" style="color: darkred;" th:text="#{${err}}"></p>
+                <label th:for="passport.passportId">Passport ID: </label>
+                <input type="text" th:field="*{passportId}"><br>
+                <p th:each="err : ${#fields.errors('passportId')}" style="color: darkred;" th:text="#{${err}}"></p>
+            </div>
             <label th:for="role">Role: </label>
             <ul style="list-style-type: none">
                 <li th:each="role : ${roles}">
