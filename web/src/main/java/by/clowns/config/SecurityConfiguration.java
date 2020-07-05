@@ -12,7 +12,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/cars", "/taxi/register").authenticated()
+                .antMatchers("/cars", "/taxi/register", "/truck/register", "/bus/register").authenticated()
                 .antMatchers("/users").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
             .and()
