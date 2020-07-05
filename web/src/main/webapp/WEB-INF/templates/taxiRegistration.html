@@ -2,20 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Taxi Registration</title>
+    <title th:text="#{taxi.registration}"></title>
 </head>
 <body>
 <div th:align="center">
     <form th:action="@{/taxi/register}" th:method="post" th:object="${taxi}">
-        <label for="brand">Brand: </label>
+        <label for="brand" th:text="#{brand}"></label>
         <input type="text" th:field="*{brand}" id="brand"><br>
         <p th:each="err : ${#fields.errors('brand')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="number">Number: </label>
+        <label for="number" th:text="#{number}"></label>
         <input type="text" th:field="*{number}" id="number"><br>
         <p th:each="err : ${#fields.errors('number')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="price">Price: </label>
+        <label for="price" th:text="#{price}"></label>
         <input type="number" th:field="*{price}" id="price"><br>
         <p th:each="err : ${#fields.errors('price')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="comfort" th:text="#{comfort}"></label>
         <ul style="list-style-type: none" id="comfort">
             <li th:each="comfort : ${comforts}">
                 <input type="radio" th:value="${comfort}" th:field="*{comfort}">
@@ -23,7 +24,7 @@
             </li>
         </ul>
         <p th:each="err : ${#fields.errors('comfort')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <button type="submit">Save</button>
+        <button type="submit" th:text="#{save}"></button>
     </form>
 </div>
 </body>

@@ -2,32 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title th:text="#{registration}"></title>
 </head>
 <body>
     <div th:align="center">
         <form th:action="@{/user/register}" th:method="post" th:object="${user}">
-            <label th:for="username">Username: </label>
+            <label th:for="username" th:text="#{username}"></label>
             <input type="text" th:field="*{username}"><br>
             <p th:each="err : ${#fields.errors('username')}" style="color: darkred;" th:text="#{${err}}"></p>
-            <label th:for="password">Password: </label>
+            <label th:for="password" th:text="#{password}"></label>
             <input type="password" th:field="*{password}"><br>
             <p th:each="err : ${#fields.errors('password')}" style="color: darkred;" th:text="#{${err}}"></p>
             <div th:object="${passport}">
-                <label th:for="passport.name">Real name: </label>
+                <label th:for="passport.name" th:text="#{realName}"></label>
                 <input type="text" th:field="*{name}"><br>
                 <p th:each="err : ${#fields.errors('name')}" style="color: darkred;" th:text="#{${err}}"></p>
-                <label th:for="passport.surname">Real surname: </label>
+                <label th:for="passport.surname" th:text="#{realSurname}"></label>
                 <input type="text" th:field="*{surname}"><br>
                 <p th:each="err : ${#fields.errors('surname')}" style="color: darkred;" th:text="#{${err}}"></p>
-                <label th:for="passport.birth">Date of birth: </label>
+                <label th:for="passport.birth" th:text="#{birth}"></label>
                 <input type="date" th:field="*{birth}"><br>
                 <p th:each="err : ${#fields.errors('birth')}" style="color: darkred;" th:text="#{${err}}"></p>
-                <label th:for="passport.passportId">Passport ID: </label>
+                <label th:for="passport.passportId" th:text="#{passportID}"></label>
                 <input type="text" th:field="*{passportId}"><br>
                 <p th:each="err : ${#fields.errors('passportId')}" style="color: darkred;" th:text="#{${err}}"></p>
             </div>
-            <label th:for="role">Role: </label>
+            <label th:for="role" th:text="#{role}"></label>
             <ul style="list-style-type: none">
                 <li th:each="role : ${roles}">
                     <input type="radio" th:value="${role}" th:field="*{role}">
@@ -35,7 +35,7 @@
                 </li>
             </ul>
             <p th:each="err : ${#fields.errors('role')}" style="color: darkred;" th:text="#{${err}}"></p>
-            <button type="submit">Save</button>
+            <button type="submit" th:text="#{save}"></button>
         </form>
     </div>
 </body>

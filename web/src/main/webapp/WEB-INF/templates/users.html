@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/WEB-INF/css/style.css" type="text/css">
-    <title>User's list</title>
+    <title th:text="#{user.list}"></title>
 </head>
 <body>
     <div th:align="center" th:object="${users}">
         <li th:each="user : ${users}">
-            <label for="username">Username: </label>
+            <label for="username" th:text="#{username}"></label>
             <span th:text="${user.username}" id="username"></span> <br>
-            <label for="role">Role: </label>
+            <label for="role" th:text="#{role}"></label>
             <span th:text="${user.role}" id="role"></span> <br>
-            <label for="realName">Real Name: </label>
+            <label for="realName" th:text="#{realName}"></label>
             <span th:text="${user.passport.name}" id="realName"></span> <br>
-            <label for="realSurname">Real Surname: </label>
+            <label for="realSurname" th:text="#{realSurname}"></label>
             <span th:text="${user.passport.surname}" id="realSurname"></span> <br>
-            <label for="birth">Date of Birth: </label>
+            <label for="birth" th:text="#{birth}"></label>
             <span th:text="${user.passport.birth}" id="birth"></span> <br>
             <hr>
         </li>
-        <a th:href="@{/}" class="home">To Home</a>
+        <a th:href="@{/}" class="home" th:text="#{home}"></a>
     </div>
 </body>
 </html>
