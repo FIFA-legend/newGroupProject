@@ -24,6 +24,10 @@
             </li>
         </ul>
         <p th:each="err : ${#fields.errors('comfort')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="regions" th:text="#{region.name}"></label>
+        <select multiple="multiple" id="regions" th:field="*{regions}">
+            <option th:each="reg : ${regions}" th:value="${{reg}}" th:text="${reg.name}"></option>
+        </select><br>
         <button type="submit" th:text="#{save}"></button>
     </form>
 </div>

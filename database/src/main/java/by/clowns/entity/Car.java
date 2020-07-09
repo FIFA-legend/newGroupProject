@@ -36,7 +36,12 @@ public class Car extends BaseEntity {
     @Pattern(regexp = "^\\d{4}\\s[A-Z]{2}-\\d$", message = "errors.car.number")
     private String number;
 
-    @ManyToMany(mappedBy = "cars", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "regions_cars",
+            inverseJoinColumns = @JoinColumn(name = "region_id"),
+            joinColumns = @JoinColumn(name = "car_id")
+    )
     private Set<Region> regions;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER)

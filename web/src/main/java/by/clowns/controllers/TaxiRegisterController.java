@@ -1,7 +1,9 @@
 package by.clowns.controllers;
 
 import by.clowns.entity.Comfort;
+import by.clowns.entity.Region;
 import by.clowns.entity.Taxi;
+import by.clowns.service.RegionService;
 import by.clowns.service.TaxiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,15 +13,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 public class TaxiRegisterController {
 
     private TaxiService taxiService;
 
+    private RegionService regionService;
+
     @Autowired
-    public TaxiRegisterController(TaxiService taxiService) {
+    public TaxiRegisterController(TaxiService taxiService, RegionService regionService) {
         this.taxiService = taxiService;
+        this.regionService = regionService;
     }
 
     @ModelAttribute("taxi")
@@ -30,6 +36,11 @@ public class TaxiRegisterController {
     @ModelAttribute("comforts")
     public Comfort[] comforts() {
         return taxiService.getAllComforts();
+    }
+
+    @ModelAttribute("regions")
+    public Set<Region> regions() {
+        return regionService.read();
     }
 
     @GetMapping("/taxi/register")

@@ -19,6 +19,10 @@
         <label for="carrying" th:text="#{carrying}"></label>
         <input type="number" th:field="*{carrying}" id="carrying"><br>
         <p th:each="err : ${#fields.errors('carrying')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="regions" th:text="#{region.name}"></label>
+        <select multiple="multiple" id="regions" th:field="*{regions}">
+            <option th:each="reg : ${regions}" th:value="${{reg}}" th:text="${reg.name}"></option>
+        </select><br>
         <button type="submit" th:text="#{save}"></button>
     </form>
 </div>
