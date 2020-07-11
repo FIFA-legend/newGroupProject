@@ -14,7 +14,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
         http.authorizeRequests()
-                .antMatchers("/cars", "/taxi/register", "/truck/register", "/bus/register").authenticated()
+                .antMatchers("/cars", "/taxi/register", "/truck/register", "/bus/register", "/request/save").authenticated()
                 .antMatchers("/users", "/region/register").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
             .and()

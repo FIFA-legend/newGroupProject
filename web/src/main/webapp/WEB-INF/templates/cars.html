@@ -7,14 +7,15 @@
 </head>
 <body>
     <div th:align="center" th:object="${cars}">
-        <ul style="list-style-type: none" id="roles">
+        <ul style="list-style-type: none" id="cars">
             <li th:each="car : ${cars}">
-                <label for="brand" th:text="#{brand}"></label>
-                <span th:text="${car.brand}" id="brand"></span> <br>
+                <a th:href="@{/car/{id}/details(id=${car.id})}" id="brand" th:text="${car.brand} + ' ' + ${car.model}"></a> <br>
                 <label for="price" th:text="#{price}"></label>
                 <span th:text="${car.price}" id="price"></span> <br>
                 <label for="number" th:text="#{number}"></label>
                 <span th:text="${car.number}" id="number"></span> <br>
+                <label for="regions" th:text="#{regions}"></label>
+                <span th:each="reg : ${car.regions}" id="regions" th:text="${reg.name + ' '}"></span>
                 <hr>
             </li>
         </ul>
@@ -32,9 +33,9 @@
                 <option value="TRUCK" th:text="#{truck}"></option>
                 <option value="TAXI" th:text="#{taxi}"></option>
             </select>
-            <label for="regions" th:text="#{regions}"></label>
-            <select name="regions_car_id" id="regions" multiple th:object="${regions}">
-                <option th:each="region : ${regions}" th:value="${region.car.id}" th:text="${region.name}"></option>
+            <label for="regionSelector" th:text="#{regions}"></label>
+            <select name="regions_car_id" id="regionSelector" multiple th:object="${regions}">
+                <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
             </select>
             <button type="submit" th:text="#{confirm}"></button>
         </form>

@@ -58,6 +58,10 @@ public class UserService implements ServiceInterface<User>, UserDetailsService {
         return userRepository.findById(id);
     }
 
+    public User get(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public Role[] getAllRoles() {
         return Role.values();
     }

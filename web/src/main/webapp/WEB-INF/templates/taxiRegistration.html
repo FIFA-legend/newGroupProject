@@ -10,6 +10,9 @@
         <label for="brand" th:text="#{brand}"></label>
         <input type="text" th:field="*{brand}" id="brand"><br>
         <p th:each="err : ${#fields.errors('brand')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="model" th:text="#{model}"></label>
+        <input type="text" th:field="*{model}" id="model"><br>
+        <p th:each="err : ${#fields.errors('model')}" style="color: darkred;" th:text="#{${err}}"></p>
         <label for="number" th:text="#{number}"></label>
         <input type="text" th:field="*{number}" id="number"><br>
         <p th:each="err : ${#fields.errors('number')}" style="color: darkred;" th:text="#{${err}}"></p>

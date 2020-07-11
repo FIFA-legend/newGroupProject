@@ -27,6 +27,10 @@ public class Car extends BaseEntity {
     @NotEmpty(message = "errors.car.brand")
     private String brand;
 
+    @Column(name = "model")
+    @NotEmpty(message = "errors.car.model")
+    private String model;
+
     @Column(name = "price")
     @Min(value = 2, message = "errors.car.price")
     @Max(value = 50, message = "errors.car.price")
