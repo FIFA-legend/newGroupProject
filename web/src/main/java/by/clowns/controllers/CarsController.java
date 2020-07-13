@@ -41,7 +41,6 @@ public class CarsController {
     public CarsController(CarService carService, RegionService regionService, CarFilterService carFilterService) {
         this.carService = carService;
         this.regionService = regionService;
-        this.carFilterService = carFilterService;
     }
 
     @GetMapping("/cars")

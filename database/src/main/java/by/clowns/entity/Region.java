@@ -1,5 +1,6 @@
 package by.clowns.entity;
 
+import by.clowns.validation.ValidRegions;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,14 +17,12 @@ import java.util.Set;
 public class Region extends BaseEntity {
 
     @Column(name = "name")
+    @ValidRegions(
+            allowedRegionNames = {"Советский", "Центральный", "Первомайский", "Фрунзенский", "Партизанский", "Ленинский", "Октябрьский"}
+            )
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "regions_cars",
-            joinColumns = @JoinColumn(name = "region_id"),
-            inverseJoinColumns = @JoinColumn(name = "car_id")
-    )
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "regions")
     private Set<Car> cars;
 
     @Version

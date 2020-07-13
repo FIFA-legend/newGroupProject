@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{truck.registration}"></title>
+</head>
+<body>
+<div th:align="center">
+    <form th:action="@{/truck/register}" th:method="post" th:object="${truck}">
+        <label for="brand" th:text="#{brand}"></label>
+        <input type="text" th:field="*{brand}" id="brand"><br>
+        <p th:each="err : ${#fields.errors('brand')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="model" th:text="#{model}"></label>
+        <input type="text" th:field="*{model}" id="model"><br>
+        <p th:each="err : ${#fields.errors('model')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="number" th:text="#{number}"></label>
+        <input type="text" th:field="*{number}" id="number"><br>
+        <p th:each="err : ${#fields.errors('number')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="price" th:text="#{price}"></label>
+        <input type="number" th:field="*{price}" id="price"><br>
+        <p th:each="err : ${#fields.errors('price')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="carrying" th:text="#{carrying}"></label>
+        <input type="number" th:field="*{carrying}" id="carrying"><br>
+        <p th:each="err : ${#fields.errors('carrying')}" style="color: darkred;" th:text="#{${err}}"></p>
+        <label for="regions" th:text="#{region.name}"></label>
+        <select multiple="multiple" id="regions" th:field="*{regions}">
+            <option th:each="reg : ${regions}" th:value="${{reg}}" th:text="${reg.name}"></option>
+        </select><br>
+        <button type="submit" th:text="#{save}"></button>
+    </form>
+</div>
+</body>
+</html>

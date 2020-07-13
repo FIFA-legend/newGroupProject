@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{car}"></title>
+</head>
+<body>
+<th:block th:if="${bus!=null}">
+    <div th:align="center" th:object="${bus}">
+        <label for="brandBus" th:text="#{brand}"></label>
+        <span th:text="${bus.brand}" id="brandBus"></span> <br>
+        <label for="modelBus" th:text="#{brand}"></label>
+        <span th:text="${bus.model}" id="modelBus"></span> <br>
+        <label for="priceBus" th:text="#{price}"></label>
+        <span th:text="${bus.price}" id="priceBus"></span> <br>
+        <label for="numberBus" th:text="#{number}"></label>
+        <span th:text="${bus.number}" id="numberBus"></span> <br>
+        <label for="capacityBus" th:text="#{capacity}"></label>
+        <span th:text="${bus.capacity}" id="capacityBus"></span> <br>
+        <form th:action="@{/car/{id}/details(id=${bus.id})}" method="post">
+            <button type="submit" th:text="#{confirm}"></button>
+        </form>
+    </div>
+</th:block>
+<th:block th:if="${taxi!=null}">
+    <div th:align="center" th:object="${taxi}">
+        <label for="brandTaxi" th:text="#{brand}"></label>
+        <span th:text="${taxi.brand}" id="brandTaxi"></span> <br>
+        <label for="modelTaxi" th:text="#{brand}"></label>
+        <span th:text="${taxi.model}" id="modelTaxi"></span> <br>
+        <label for="priceTaxi" th:text="#{price}"></label>
+        <span th:text="${taxi.price}" id="priceTaxi"></span> <br>
+        <label for="numberTaxi" th:text="#{number}"></label>
+        <span th:text="${taxi.number}" id="numberTaxi"></span> <br>
+        <label for="typeTaxi" th:text="#{comfort}"></label>
+        <span th:text="${taxi.comfort}" id="typeTaxi"></span> <br>
+        <form th:action="@{/car/{id}/details(id=${taxi.id})}" method="post">
+            <button type="submit" th:text="#{confirm}"></button>
+        </form>
+    </div>
+</th:block>
+<th:block th:if="${truck!=null}">
+    <div th:align="center" th:object="${truck}">
+        <label for="brandTruck" th:text="#{brand}"></label>
+        <span th:text="${truck.brand}" id="brandTruck"></span> <br>
+        <label for="modelTruck" th:text="#{brand}"></label>
+        <span th:text="${truck.model}" id="modelTruck"></span> <br>
+        <label for="priceTruck" th:text="#{price}"></label>
+        <span th:text="${truck.price}" id="priceTruck"></span> <br>
+        <label for="numberTruck" th:text="#{number}"></label>
+        <span th:text="${truck.number}" id="numberTruck"></span> <br>
+        <label for="carryingTruck" th:text="#{carrying}"></label>
+        <span th:text="${truck.carrying}" id="carryingTruck"></span> <br>
+        <form th:action="@{/car/{id}/details(id=${truck.id})}" method="post">
+            <button type="submit" th:text="#{confirm}"></button>
+        </form>
+    </div>
+</th:block>
+</body>
+</html>

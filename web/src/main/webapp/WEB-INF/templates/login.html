@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/WEB-INF/css/style.css" type="text/css">
-    <title>Login</title>
+    <title th:text="#{authorization}"></title>
 </head>
 <body>
     <form th:action="@{/myLogin}" method="post">
         <div th:align="center">
-            <label for="name">Username: </label>
+            <label for="name" th:text="#{login}"></label>
             <input type="text" id="name" name="username"> <br>
-            <label for="pass">Password: </label>
+            <label for="pass" th:text="#{password}"></label>
             <input type="password" id="pass" name="password"> <br>
-            <button type="submit">Login</button>
+            <button type="submit" th:text="#{enter}"></button>
         </div>
     </form>
 </body>

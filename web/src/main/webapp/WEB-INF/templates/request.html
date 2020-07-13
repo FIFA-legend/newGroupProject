@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Request</title>
+</head>
+<body>
+<div th:align="center">
+    <label for="car" th:text="#{car}"></label>
+    <span th:text="${car.brand} + ' ' + ${car.model}" id="car"></span> <br>
+    <label for="user" th:text="#{customer}"></label>
+    <span th:text="${user.passport.name} + ' ' + ${user.passport.surname}" id="user"></span>
+</div>
+</body>
+</html>

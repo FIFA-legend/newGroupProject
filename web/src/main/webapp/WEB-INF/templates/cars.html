@@ -3,37 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/WEB-INF/css/style.css" type="text/css">
-    <title>Car's list</title>
+    <title th:text="#{car.list}"></title>
 </head>
 <body>
     <div th:align="center" th:object="${cars}">
-        <li th:each="car : ${cars}">
-            <label for="price">Price: </label>
-            <span th:text="${car.price}" id="price"></span> <br>
-            <label for="number">Number: </label>
-            <span th:text="${car.number}" id="number"></span> <br>
-            <hr>
-        </li>
-        <a th:href="@{/}" class="home">To Home</a>
+        <ul style="list-style-type: none" id="cars">
+            <li th:each="car : ${cars}">
+                <a th:href="@{/car/{id}/details(id=${car.id})}" id="brand" th:text="${car.brand} + ' ' + ${car.model}"></a> <br>
+                <label for="price" th:text="#{price}"></label>
+                <span th:text="${car.price}" id="price"></span> <br>
+                <label for="number" th:text="#{number}"></label>
+                <span th:text="${car.number}" id="number"></span> <br>
+                <label for="regions" th:text="#{regions}"></label>
+                <span th:each="reg : ${car.regions}" id="regions" th:text="${reg.name + ' '}"></span>
+                <hr>
+            </li>
+        </ul>
+        <a th:href="@{/}" class="home" th:text="#{home}"></a>
     </div>
     <div class="filter">
-        
-        <form th:action ="@{/cars}" method="get" th:object="${modelCar}">
-            <label th:for="*{price}">Максимальная цена: </label>
-            <input type="number" th:field="*{price}">
-<!--            <label for="type">Тип машины: </label>-->
-<!--            <select name="type" id="type" multiple>-->
-<!--                <option value="NOT" selected>Не определено</option>-->
-<!--                <option value="CAR">Без спецификаций</option>-->
-<!--                <option value="BUS">Автобус</option>-->
-<!--                <option value="TRUCK">Грузовик</option>-->
-<!--                <option value="TAXI">Легковая</option>-->
-<!--            </select>-->
-            <label for="regions">Регионы: </label>
-            <select name="regions_car_id" id="regions" multiple th:object="${regions}">
-                <option th:each="region : ${regions}" th:value="${region.car.id}" th:text="${region.name}"></option>
+        <form th:action ="@{/cars}" method="get" th:object="${cars}">
+            <label for="price_form" th:text="#{max.price}"></label>
+            <input type="number" name="price" id="price_form">
+            <label for="type" th:text="#{car.type}"></label>
+            <select name="type" id="type" multiple>
+                <option value="NOT" selected th:text="#{undefined}"></option>
+                <option value="CAR" th:text="#{default}"></option>
+                <option value="BUS" th:text="#{bus}"></option>
+                <option value="TRUCK" th:text="#{truck}"></option>
+                <option value="TAXI" th:text="#{taxi}"></option>
             </select>
-            <button type="submit">Подтвердить</button>
+            <label for="regionSelector" th:text="#{regions}"></label>
+            <select name="regions_car_id" id="regionSelector" multiple th:object="${regions}">
+                <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
+            </select>
+            <button type="submit" th:text="#{confirm}"></button>
         </form>
     </div>
 </body>

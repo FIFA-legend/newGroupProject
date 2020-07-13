@@ -26,8 +26,8 @@ public class ThymeleafConfig {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setCharacterEncoding(characterEncoding);
-        templateResolver.setPrefix(prefix);
-        templateResolver.setSuffix(suffix);
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".html");
         return templateResolver;
     }
 
