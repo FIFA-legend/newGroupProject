@@ -1,12 +1,15 @@
 package by.clowns.controllers;
 
 import by.clowns.entity.Car;
+import by.clowns.entity.Region;
+import by.clowns.service.CarFilterService;
 import by.clowns.service.CarService;
 import by.clowns.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,20 +20,37 @@ public class CarsController {
 
     private RegionService regionService;
 
+    private CarFilterService carFilterService;
+
+    @ModelAttribute("cars")
+    Set<Car> cars(){
+        return carService.read();
+    }
+
+    @ModelAttribute("modelCar")
+    Car modelCar(){
+        return new Car();
+    }
+
+    @ModelAttribute("regions")
+    Set<Region> regions(){
+        return regionService.read();
+    }
+
     @Autowired
-    public CarsController(CarService carService, RegionService regionService) {
+    public CarsController(CarService carService, RegionService regionService, CarFilterService carFilterService) {
         this.carService = carService;
         this.regionService = regionService;
     }
 
     @GetMapping("/cars")
-    public String cars(Model model) {
-        Set<Car> cars = carService.read();
-        cars = cars.stream()
-                .filter(car -> car.getPrice() < (int) model.asMap().getOrDefault("price", Integer.MAX_VALUE))
-                .collect(Collectors.toSet());
-        model.addAttribute("cars", carService.read());
-        model.addAttribute("regions", regionService.read());
+    public String cars(Model model, @ModelAttribute Car car) {
+        Set<Car> cars = carFilterService.carFilterQuery(new Car(
+                (String) model.asMap().get("brand"),
+                (double)model.asMap().getOrDefault("price", -1),
+                ""
+                ));
+        model.addAttribute("cars", cars);
         return "cars";
     }
 
