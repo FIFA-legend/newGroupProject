@@ -45,7 +45,6 @@ public class UserRegisterController {
 
     @PostMapping("/user/register")
     public String getRegister(@Valid User user, Errors userErrors, @Valid Passport passport, Errors passportErrors) {
-        System.out.println(userErrors.getErrorCount());
         if (userErrors.hasErrors() || passportErrors.hasErrors()) return "registrationPage";
         user.setPassport(passport);
         userService.create(user);

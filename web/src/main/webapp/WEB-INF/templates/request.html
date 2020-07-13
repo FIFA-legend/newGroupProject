@@ -8,8 +8,13 @@
 <div th:align="center">
     <label for="car" th:text="#{car}"></label>
     <span th:text="${car.brand} + ' ' + ${car.model}" id="car"></span> <br>
+    <label for="price" th:text="#{price}"></label>
+    <span th:text="${car.price}" id="price"></span> <br>
     <label for="user" th:text="#{customer}"></label>
-    <span th:text="${user.passport.name} + ' ' + ${user.passport.surname}" id="user"></span>
+    <span th:text="${user.passport.name} + ' ' + ${user.passport.surname}" id="user"></span> <br>
+    <form method="post" th:action="@{/request/save}">
+        <button type="submit" th:text="#{checkout}"></button>
+    </form>
 </div>
 </body>
 </html>
