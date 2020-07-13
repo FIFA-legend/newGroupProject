@@ -25,7 +25,7 @@ public class User extends BaseEntity {
 
     @Column(name = "password")
     @NotEmpty(message = "errors.user.password.empty")
-    @Size(min = 8, max = 24, message = "errors.user.password.size")
+    @Size(min = 8, max = 60, message = "errors.user.password.size")
     private String password;
 
     private Passport passport;

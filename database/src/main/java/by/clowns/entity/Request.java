@@ -3,6 +3,7 @@ package by.clowns.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -16,6 +17,7 @@ public class Request extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private User user;
 
     @OneToOne

@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -21,13 +22,17 @@ public class UserService implements ServiceInterface<User>, UserDetailsService {
 
     private UserRepository userRepository;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public void setUserRepository(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     public void create(User entity) {
+        entity.setPassword(bCryptPasswordEncoder.encode(entity.getPassword()));
         userRepository.save(entity);
     }
 
@@ -71,6 +76,8 @@ public class UserService implements ServiceInterface<User>, UserDetailsService {
         User user = userRepository.findByUsername(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), convertRoles(user));
     }
+
+
 
     private Collection<GrantedAuthority> convertRoles(User user) {
         Set<GrantedAuthority> set = new HashSet<>();
