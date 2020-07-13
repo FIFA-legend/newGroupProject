@@ -22,13 +22,13 @@
         <a th:href="@{/}" class="home" th:text="#{home}"></a>
     </div>
     <div class="filter">
-        <form th:action ="@{/cars}" method="get" th:object="${cars}">
+        <form th:action ="@{/cars}" method="get" th:object="${modelCar}">
             <label for="price_form" th:text="#{max.price}"></label>
-            <input type="number" name="price" id="price_form">
-            <label for="brand_form" th:text="#{brand}"></label>
+            <input type="number" name="price" id="price_form" th:field="*{price}">
+            <label for="brand_form" th:text="#{brand}" th:field="*{brand}"></label>
             <input type="text" name="brand" id="brand_form">
 
-            <label for="type" th:text="#{car.type}"></label>
+           <!-- <label for="type" th:text="#{car.type}"></label>
             <select name="type" id="type" multiple>
                 <option value="NOT" selected th:text="#{undefined}"></option>
                 <option value="CAR" th:text="#{default}"></option>
@@ -39,7 +39,7 @@
             <label for="regionSelector" th:text="#{regions}"></label>
             <select name="regions_car_id" id="regionSelector" multiple th:object="${regions}">
                 <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
-            </select>
+            </select>-->
             <button type="submit" th:text="#{confirm}"></button>
         </form>
     </div>
