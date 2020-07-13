@@ -39,6 +39,9 @@ public class CarFilterDao {
         if(car.getPrice() > 0) {
             carCriteria.where(cb.greaterThanOrEqualTo(carRoot.get("price"), car.getPrice()));
         }
+        if(!car.getBrand().isEmpty()) {
+            carCriteria.where(cb.equal(carRoot.get("brand"), car.getBrand()));
+        }
         return em.createQuery(carCriteria)
                 .getResultList();
     }

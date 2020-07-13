@@ -32,7 +32,7 @@ public class CarsController {
         return new Car();
     }
 
-    @ModelAttribute("modelCar")
+    @ModelAttribute("regions")
     Set<Region> regions(){
         return regionService.read();
     }
@@ -45,7 +45,11 @@ public class CarsController {
 
     @GetMapping("/cars")
     public String cars(Model model, @ModelAttribute Car car) {
-        Set<Car> cars = carFilterService.carFilterQuery(car);
+        Set<Car> cars = carFilterService.carFilterQuery(new Car(
+                (String) model.asMap().get("brand"),
+                (double)model.asMap().getOrDefault("price", -1),
+                ""
+                ));
         model.addAttribute("cars", cars);
         return "cars";
     }
