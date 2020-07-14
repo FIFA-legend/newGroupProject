@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Controller
 public class UserRegisterController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserRegisterController(UserService userService) {

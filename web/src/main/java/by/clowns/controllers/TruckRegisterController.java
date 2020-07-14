@@ -17,9 +17,9 @@ import java.util.Set;
 @Controller
 public class TruckRegisterController {
 
-    private TruckService truckService;
+    private final TruckService truckService;
 
-    private RegionService regionService;
+    private final RegionService regionService;
 
     @Autowired
     public TruckRegisterController(TruckService truckService, RegionService regionService) {

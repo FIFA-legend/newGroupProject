@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class UserRequestsController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserRequestsController(UserService userService) {

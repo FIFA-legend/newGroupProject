@@ -18,9 +18,9 @@ import java.util.Map;
 @Controller
 public class RequestController {
 
-    private UserService userService;
+    private final UserService userService;
 
-    private RequestService requestService;
+    private final RequestService requestService;
 
     private Map<String, Object> map;
 

@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Controller
 public class RegionRegisterController {
 
-    private RegionRepository regionRepository;
+    private final RegionRepository regionRepository;
 
     @Autowired
     public RegionRegisterController(RegionRepository regionRepository) {

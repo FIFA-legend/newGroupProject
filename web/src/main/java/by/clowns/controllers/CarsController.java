@@ -13,15 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @ComponentScan("by.clowns.dao")
 public class CarsController {
 
-    private CarService carService;
+    private final CarService carService;
 
-    private RegionService regionService;
+    private final RegionService regionService;
 
     private CarFilterService carFilterService;
 
@@ -49,7 +48,7 @@ public class CarsController {
 
     @GetMapping("/cars")
     public String cars(Model model, CarDTO car) {
-        Set<Car> cars = carFilterService.carFilterQuery(car);
+        Set<Car> cars = carFilterService.filter(car);
         model.addAttribute("cars", cars);
         return "cars";
     }

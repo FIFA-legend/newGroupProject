@@ -1,7 +1,5 @@
 package by.clowns.controllers;
 
-import by.clowns.entity.Car;
-import by.clowns.entity.Truck;
 import by.clowns.service.BusService;
 import by.clowns.service.TaxiService;
 import by.clowns.service.TruckService;
@@ -16,11 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class CarController {
 
-    private TruckService truckService;
+    private final TruckService truckService;
 
-    private BusService busService;
+    private final BusService busService;
 
-    private TaxiService taxiService;
+    private final TaxiService taxiService;
 
     @Autowired
     public CarController(TruckService truckService, BusService busService, TaxiService taxiService) {

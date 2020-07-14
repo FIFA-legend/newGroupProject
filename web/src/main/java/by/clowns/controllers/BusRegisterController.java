@@ -17,9 +17,9 @@ import java.util.Set;
 @Controller
 public class BusRegisterController {
 
-    private BusService busService;
+    private final BusService busService;
 
-    private RegionService regionService;
+    private final RegionService regionService;
 
     @Autowired
     public BusRegisterController(BusService busService, RegionService regionService) {

@@ -1,10 +1,10 @@
-package by.clowns.dao;
+package by.clowns.repository;
 
 import by.clowns.dto.CarDTO;
 import by.clowns.entity.Car;
 import by.clowns.entity.Region;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,18 +14,17 @@ import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
-@Transactional
-@Scope("singleton")
-public class CarFilterDao {
+public class CarFilter {
 
-    private EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
     @Autowired
-    public CarFilterDao(EntityManagerFactory entityManagerFactory) {
+    public CarFilter(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    public List<Car> carFilterQuery(CarDTO carDTO){
+    @Transactional
+    public List<Car> filter(CarDTO example){
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -33,24 +32,24 @@ public class CarFilterDao {
         CriteriaQuery<Car> carCriteria = cb.createQuery(Car.class);
         Root<Car> carRoot = carCriteria.from(Car.class);
         Predicate[] predicates = new Predicate[4];
-        if(carDTO.getNumber() != null && !carDTO.getNumber().isEmpty()) {
-            predicates[0] = cb.equal(carRoot.get("number"), carDTO.getNumber());
+        if(example.getNumber() != null && !example.getNumber().isEmpty()) {
+            predicates[0] = cb.equal(carRoot.get("number"), example.getNumber());
         } else {
             predicates[0] = cb.like(carRoot.get("number"), "%");
         }
-        if(carDTO.getMaxPrice() > 0 && carDTO.getMinPrice() > 0) {
-            predicates[1] = cb.between(carRoot.get("price"), carDTO.getMinPrice(), carDTO.getMaxPrice());
+        if(example.getMaxPrice() > 0 && example.getMinPrice() > 0) {
+            predicates[1] = cb.between(carRoot.get("price"), example.getMinPrice(), example.getMaxPrice());
         } else {
             predicates[1] = cb.between(carRoot.get("price"), 2, 50);
         }
-        if(carDTO.getBrand() != null && !carDTO.getBrand().isEmpty()) {
-            predicates[2] = cb.equal(carRoot.get("brand"), carDTO.getBrand());
+        if(example.getBrand() != null && !example.getBrand().isEmpty()) {
+            predicates[2] = cb.equal(carRoot.get("brand"), example.getBrand());
         } else {
             predicates[2] = cb.like(carRoot.get("brand"), "%");
         }
-        if (carDTO.getRegions() != null && !carDTO.getRegions().isEmpty()) {
+        if (example.getRegions() != null && !example.getRegions().isEmpty()) {
             Join<Region, Car> region = carRoot.join("regions");
-            predicates[3] = cb.equal(region.get("name"), carDTO.getRegions().get(0).getName());
+            predicates[3] = cb.equal(region.get("name"), example.getRegions().get(0).getName());
         }
         if (predicates[3] != null) {
             carCriteria.select(carRoot).where(predicates);
