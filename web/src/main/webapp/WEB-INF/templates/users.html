@@ -9,7 +9,8 @@
     <div th:align="center" th:object="${users}">
         <li th:each="user : ${users}">
             <label for="username" th:text="#{username}"></label>
-            <span th:text="${user.username}" id="username"></span> <br>
+            <a th:href="@{/user/{id}/requests(id=${user.id})}" id="username" th:text="${user.username}"></a>
+            <br>
             <label for="role" th:text="#{role}"></label>
             <span th:text="${user.role}" id="role"></span> <br>
             <label for="realName" th:text="#{realName}"></label>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{order.list}"></title>
+</head>
+<body>
+<div th:align="center">
+    <label for="user" th:text="#{username}"></label>
+    <span id="user" th:text="${user.username}"></span>
+    <ul style="list-style-type: none" th:if="${!user.requests.isEmpty()}">
+        <li th:each="req : ${user.requests}">
+            <label for="car" th:text="#{car}"></label>
+            <span th:text="${req.car.brand} + ' ' + ${req.car.model}" id="car"></span> <br>
+            <label for="price" th:text="#{price}"></label>
+            <span th:text="${req.car.price}" id="price"></span> <br>
+            <label for="number" th:text="#{number}"></label>
+            <span th:text="${req.car.number}" id="number"></span> <br>
+            <hr>
+        </li>
+    </ul>
+    <p th:if="${user.requests.isEmpty()}" th:text="#{orders.zero}"></p>
+    <a th:href="@{/users}" th:text="#{back}"></a>
+</div>
+</body>
+</html>

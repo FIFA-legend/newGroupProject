@@ -8,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -32,17 +30,25 @@ public class CarFilterDao {
 
         CriteriaQuery<Car> carCriteria = cb.createQuery(Car.class);
         Root<Car> carRoot = carCriteria.from(Car.class);
-        carCriteria.select(carRoot);
-        if(!car.getNumber().isEmpty()) {
-            carCriteria.where(cb.equal(carRoot.get("number"), car.getNumber()));
+        Predicate[] predicates = new Predicate[3];
+        if(car.getNumber() != null && !car.getNumber().isEmpty()) {
+            predicates[0] = cb.equal(carRoot.get("number"), car.getNumber());
+        } else {
+            predicates[0] = cb.like(carRoot.get("number"), "%");
         }
         if(car.getPrice() > 0) {
-            carCriteria.where(cb.greaterThanOrEqualTo(carRoot.get("price"), car.getPrice()));
+            predicates[1] = cb.lessThanOrEqualTo(carRoot.get("price"), car.getPrice());
+        } else {
+            predicates[1] = cb.between(carRoot.get("price"), 2, 50);
         }
-        if(!car.getBrand().isEmpty()) {
-            carCriteria.where(cb.equal(carRoot.get("brand"), car.getBrand()));
+        if(car.getBrand() != null && !car.getBrand().isEmpty()) {
+            predicates[2] = cb.equal(carRoot.get("brand"), car.getBrand());
+        } else {
+            predicates[2] = cb.like(carRoot.get("brand"), "%");
         }
+        carCriteria.select(carRoot).where(predicates);
         return em.createQuery(carCriteria)
                 .getResultList();
     }
+
 }

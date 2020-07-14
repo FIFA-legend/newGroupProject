@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
         http.authorizeRequests()
                 .antMatchers("/cars", "/taxi/register", "/truck/register", "/bus/register", "/request/save").authenticated()
-                .antMatchers("/users", "/region/register").hasAuthority("ADMIN")
+                .antMatchers("/users", "/region/register", "/user/{id}/requests").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
             .and()
                 .formLogin()
