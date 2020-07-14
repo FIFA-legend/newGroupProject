@@ -23,12 +23,14 @@
     </div>
     <div class="filter">
         <form th:action ="@{/cars}" method="get" th:object="${modelCar}">
-            <label for="price_form" th:text="#{max.price}"></label>
-            <input type="number" name="price" id="price_form" th:field="*{price}">
+            <label for="min_price_form" th:text="#{min.price}"></label>
+            <input type="number" name="price" id="min_price_form" th:field="*{minPrice}"> <br>
+            <label for="max_price_form" th:text="#{max.price}"></label>
+            <input type="number" name="price" id="max_price_form" th:field="*{maxPrice}"> <br>
             <label for="brand_form" th:text="#{brand}" th:field="*{brand}"></label>
-            <input type="text" name="brand" id="brand_form">
+            <input type="text" name="brand" id="brand_form"> <br>
             <label for="number_form" th:text="#{number}" th:field="*{number}"></label>
-            <input type="text" name="number" id="number_form">
+            <input type="text" name="number" id="number_form"> <br>
 
            <!-- <label for="type" th:text="#{car.type}"></label>
             <select name="type" id="type" multiple>
@@ -37,11 +39,11 @@
                 <option value="BUS" th:text="#{bus}"></option>
                 <option value="TRUCK" th:text="#{truck}"></option>
                 <option value="TAXI" th:text="#{taxi}"></option>
-            </select>
-            <label for="regionSelector" th:text="#{regions}"></label>
-            <select name="regions_car_id" id="regionSelector" multiple th:object="${regions}">
-                <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
             </select>-->
+            <label for="regionSelector" th:text="#{regions}"></label>
+            <select name="regions_car_id" id="regionSelector" multiple th:field="*{regions}">
+                <option th:each="region : ${regions}" th:value="${{region}}" th:text="${region.name}"></option>
+            </select>
             <button type="submit" th:text="#{confirm}"></button>
         </form>
     </div>

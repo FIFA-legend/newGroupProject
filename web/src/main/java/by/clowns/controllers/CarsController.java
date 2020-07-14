@@ -1,5 +1,6 @@
 package by.clowns.controllers;
 
+import by.clowns.dto.CarDTO;
 import by.clowns.entity.Car;
 import by.clowns.entity.Region;
 import by.clowns.service.CarFilterService;
@@ -30,8 +31,8 @@ public class CarsController {
     }
 
     @ModelAttribute("modelCar")
-    Car modelCar(){
-        return new Car();
+    CarDTO modelCar(){
+        return new CarDTO();
     }
 
     @ModelAttribute("regions")
@@ -47,12 +48,8 @@ public class CarsController {
     }
 
     @GetMapping("/cars")
-    public String cars(Model model, Car car) {
-        Set<Car> cars = carFilterService.carFilterQuery(car/*new Car(
-                (String) model.asMap().get("brand"),
-                (int) model.asMap().getOrDefault("price", -1),
-                ""
-                )*/);
+    public String cars(Model model, CarDTO car) {
+        Set<Car> cars = carFilterService.carFilterQuery(car);
         model.addAttribute("cars", cars);
         return "cars";
     }

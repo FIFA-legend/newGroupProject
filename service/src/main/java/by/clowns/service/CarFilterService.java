@@ -1,6 +1,7 @@
 package by.clowns.service;
 
 import by.clowns.dao.CarFilterDao;
+import by.clowns.dto.CarDTO;
 import by.clowns.entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class CarFilterService {
         this.carFilterDao = carFilterDao;
     }
 
-    public Set<Car> carFilterQuery(Car car) {
+    public Set<Car> carFilterQuery(CarDTO car) {
         return new HashSet<>(carFilterDao.carFilterQuery(car));
     }
 }
