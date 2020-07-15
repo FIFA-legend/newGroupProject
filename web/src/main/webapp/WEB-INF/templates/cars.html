@@ -7,6 +7,10 @@
 </head>
 <body>
     <div th:align="center" th:object="${cars}">
+        <a th:href="@{/taxi/register}" th:text="#{taxi.registration}"></a>
+        <a th:href="@{/truck/register}" th:text="#{truck.registration}"></a>
+        <a th:href="@{/bus/register}" th:text="#{bus.registration}"></a>
+        <a th:href="@{/region/register}" th:text="#{region.registration}" th:if="${loggedUser.role eq admin}"></a>
         <ul style="list-style-type: none" id="cars">
             <li th:each="car : ${cars}">
                 <a th:href="@{/car/{id}/details(id=${car.id})}" id="brand" th:text="${car.brand} + ' ' + ${car.model}"></a> <br>

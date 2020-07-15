@@ -1,19 +1,19 @@
 package by.clowns.repository;
 
-import by.clowns.entity.Request;
+import by.clowns.entity.RentRequest;
 import org.springframework.data.repository.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional
-public interface RequestRepository extends Repository<Request, Long> {
+public interface RequestRepository extends Repository<RentRequest, Long> {
 
-    Request save(Request request);
+    RentRequest save(RentRequest request);
 
-    Request findById(Long id);
+    RentRequest findById(Long id);
 
-    List<Request> findAll();
+    List<RentRequest> findAll();
 
     void deleteById(Long id);
 

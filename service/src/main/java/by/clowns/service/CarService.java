@@ -1,6 +1,5 @@
 package by.clowns.service;
 
-import by.clowns.dto.CarDTO;
 import by.clowns.entity.Car;
 import by.clowns.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;

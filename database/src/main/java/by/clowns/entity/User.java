@@ -36,7 +36,7 @@ public class User extends BaseEntity {
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Request> requests;
+    private Set<RentRequest> requests;
 
     @Version
     @Column(name = "version")
@@ -49,7 +49,7 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    public User(String username, String password, Passport passport, Role role, Set<Request> requests) {
+    public User(String username, String password, Passport passport, Role role, Set<RentRequest> requests) {
         this.username = username;
         this.password = password;
         this.passport = passport;

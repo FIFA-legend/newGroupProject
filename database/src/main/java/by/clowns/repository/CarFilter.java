@@ -4,7 +4,6 @@ import by.clowns.dto.CarDTO;
 import by.clowns.entity.Car;
 import by.clowns.entity.Region;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,25 +31,12 @@ public class CarFilter {
         CriteriaQuery<Car> carCriteria = cb.createQuery(Car.class);
         Root<Car> carRoot = carCriteria.from(Car.class);
         Predicate[] predicates = new Predicate[4];
-        if(example.getNumber() != null && !example.getNumber().isEmpty()) {
-            predicates[0] = cb.equal(carRoot.get("number"), example.getNumber());
-        } else {
-            predicates[0] = cb.like(carRoot.get("number"), "%");
-        }
-        if(example.getMaxPrice() > 0 && example.getMinPrice() > 0) {
-            predicates[1] = cb.between(carRoot.get("price"), example.getMinPrice(), example.getMaxPrice());
-        } else {
-            predicates[1] = cb.between(carRoot.get("price"), 2, 50);
-        }
-        if(example.getBrand() != null && !example.getBrand().isEmpty()) {
-            predicates[2] = cb.equal(carRoot.get("brand"), example.getBrand());
-        } else {
-            predicates[2] = cb.like(carRoot.get("brand"), "%");
-        }
-        if (example.getRegions() != null && !example.getRegions().isEmpty()) {
-            Join<Region, Car> region = carRoot.join("regions");
-            predicates[3] = cb.equal(region.get("name"), example.getRegions().get(0).getName());
-        }
+
+        predicates[0] = numberFilter(cb, example, carRoot);
+        predicates[1] = priceFilter(cb, example, carRoot);
+        predicates[2] = brandFilter(cb, example, carRoot);
+        predicates[3] = regionFilter(cb, example, carRoot);
+
         if (predicates[3] != null) {
             carCriteria.select(carRoot).where(predicates);
         } else {
@@ -60,4 +46,40 @@ public class CarFilter {
                 .getResultList();
     }
 
+    private Predicate numberFilter(CriteriaBuilder cb, CarDTO car, Root<Car> root) {
+        if (car.getNumber() != null && !car.getNumber().isEmpty()) {
+            return cb.equal(root.get("number"), car.getNumber());
+        } else {
+            return cb.like(root.get("number"), "%");
+        }
+    }
+
+    private Predicate priceFilter(CriteriaBuilder cb, CarDTO car, Root<Car> root) {
+        if (car.getMaxPrice() > 0 && car.getMinPrice() > 0) {
+            return cb.between(root.get("price"), car.getMinPrice(), car.getMaxPrice());
+        } else if (car.getMaxPrice() > 0 && car.getMinPrice() <= 0) {
+            return cb.lessThanOrEqualTo(root.get("price"), car.getMaxPrice());
+        } else if (car.getMaxPrice() <= 0 && car.getMinPrice() > 0) {
+            return cb.greaterThanOrEqualTo(root.get("price"), car.getMinPrice());
+        } else {
+            return cb.between(root.get("price"), 2, 50);
+        }
+    }
+
+    private Predicate brandFilter(CriteriaBuilder cb, CarDTO car, Root<Car> root) {
+        if (car.getBrand() != null && !car.getBrand().isEmpty()) {
+            return cb.equal(root.get("brand"), car.getBrand());
+        } else {
+            return cb.like(root.get("brand"), "%");
+        }
+    }
+
+    private Predicate regionFilter(CriteriaBuilder cb, CarDTO car, Root<Car> root) {
+        if (car.getRegions() != null && !car.getRegions().isEmpty()) {
+            Join<Region, Car> region = root.join("regions");
+            return cb.equal(region.get("name"), car.getRegions().get(0).getName());
+        } else {
+            return null;
+        }
+    }
 }

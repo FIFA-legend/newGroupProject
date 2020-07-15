@@ -1,7 +1,7 @@
 package by.clowns.service;
 
 import by.clowns.repository.RequestRepository;
-import by.clowns.entity.Request;
+import by.clowns.entity.RentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class RequestService implements ServiceInterface<Request> {
+public class RequestService implements ServiceInterface<RentRequest> {
 
     private final RequestRepository requestRepository;
 
@@ -20,19 +20,19 @@ public class RequestService implements ServiceInterface<Request> {
     }
 
     @Override
-    public void create(Request entity) {
+    public void create(RentRequest entity) {
         requestRepository.save(entity);
     }
 
     @Override
-    public Set<Request> read() {
-        List<Request> requestList = requestRepository.findAll();
+    public Set<RentRequest> read() {
+        List<RentRequest> requestList = requestRepository.findAll();
         return new HashSet<>(requestList);
     }
 
     @Override
-    public void update(Request entity, long id) {
-        Request requestToUpdate = requestRepository.findById(id);
+    public void update(RentRequest entity, long id) {
+        RentRequest requestToUpdate = requestRepository.findById(id);
         requestToUpdate.setCar(entity.getCar());
         requestToUpdate.setUser(entity.getUser());
         requestRepository.save(requestToUpdate);
@@ -44,7 +44,7 @@ public class RequestService implements ServiceInterface<Request> {
     }
 
     @Override
-    public Request get(long id) {
+    public RentRequest get(long id) {
         return requestRepository.findById(id);
     }
 }

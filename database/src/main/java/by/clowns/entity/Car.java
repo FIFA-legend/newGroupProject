@@ -9,7 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Set;
 
@@ -49,7 +48,7 @@ public class Car extends BaseEntity {
     private Set<Region> regions;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER)
-    private Request request;
+    private RentRequest request;
 
     @Version
     @Column(name = "version")

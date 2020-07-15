@@ -1,7 +1,7 @@
 package by.clowns.controllers;
 
 import by.clowns.entity.Car;
-import by.clowns.entity.Request;
+import by.clowns.entity.RentRequest;
 import by.clowns.entity.User;
 import by.clowns.service.RequestService;
 import by.clowns.service.UserService;
@@ -56,7 +56,7 @@ public class RequestController {
                 if (map.get("car") instanceof Car) {
                     user = (User) map.get("user");
                     car = (Car) map.get("car");
-                    Request request = new Request(user, car);
+                    RentRequest request = new RentRequest(user, car);
                     requestService.create(request);
                     return "successRequest";
                 }
