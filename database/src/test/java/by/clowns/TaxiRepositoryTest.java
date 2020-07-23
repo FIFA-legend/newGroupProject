@@ -2,16 +2,20 @@ package by.clowns;
 
 import by.clowns.configuration.DaoConfiguration;
 import by.clowns.entity.*;
-import by.clowns.repository.CarRepository;
 import by.clowns.repository.TaxiRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,19 +25,29 @@ public class TaxiRepositoryTest {
     @Autowired
     private TaxiRepository taxiRepository;
 
+    @Autowired
+    private ApplicationContext context;
+
+    private JdbcTemplate template;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        template = new JdbcTemplate(dataSource);
+    }
+
     @Before
-    public void init() {
-        Taxi car1 = new Taxi("Mercedes", 13.5, "8888", Comfort.BUSINESS);
-        Taxi car2 = new Taxi("Mercedes", 15.5, "7777", Comfort.ECONOMY);
-        Taxi car3 = new Taxi("Mercedes", 1.5, "6666", Comfort.UBER_BLACK);
-        taxiRepository.save(car1);
-        taxiRepository.save(car2);
-        taxiRepository.save(car3);
+    public void beforeTests() {
+        if (!DataBaseInput.flag) {
+            String classpath = "classpath:testBase.sql";
+            Resource resource = context.getResource(classpath);
+            JdbcTestUtils.executeSqlScript(template, resource, true);
+            DataBaseInput.flag = true;
+        }
     }
 
     @Test
     public void findByIdTest() {
-        Taxi car = taxiRepository.findById(2L);
+        Taxi car = taxiRepository.findById(8L);
         Assert.assertEquals(Comfort.ECONOMY, car.getComfort());
     }
 
@@ -46,7 +60,7 @@ public class TaxiRepositoryTest {
 
     @Test
     public void deleteByIdTest() {
-        taxiRepository.deleteById(3L);
+        taxiRepository.deleteById(9L);
         List<Taxi> cars = taxiRepository.findAll();
         Assert.assertEquals(2, cars.size());
     }

@@ -3,15 +3,20 @@ package by.clowns;
 import by.clowns.configuration.DaoConfiguration;
 import by.clowns.entity.Car;
 import by.clowns.repository.CarRepository;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,34 +26,46 @@ public class CarRepositoryTest {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private ApplicationContext context;
+
+    private JdbcTemplate template;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        template = new JdbcTemplate(dataSource);
+    }
+
     @Before
-    public void init() {
-        Car car1 = new Car("Mercedes", 13.5, "8888");
-        Car car2 = new Car("Mercedes", 15.5, "7777");
-        Car car3 = new Car("Mercedes", 1.5, "6666");
-        carRepository.save(car1);
-        carRepository.save(car2);
-        carRepository.save(car3);
+    public void beforeTests() {
+        if (!DataBaseInput.flag) {
+            String classpath = "classpath:testBase.sql";
+            Resource resource = context.getResource(classpath);
+            JdbcTestUtils.executeSqlScript(template, resource, true);
+            DataBaseInput.flag = true;
+        }
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void findByIdTest() {
         Car car = carRepository.findById(2L);
         Assert.assertEquals("7777", car.getNumber());
     }
 
-
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void findAllTest() {
         List<Car> cars = carRepository.findAll();
         Assert.assertEquals("8888", cars.get(0).getNumber());
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void deleteByIdTest() {
         carRepository.deleteById(3L);
         List<Car> cars = carRepository.findAll();
-        Assert.assertEquals(2, cars.size());
+        Assert.assertEquals(10, cars.size());
     }
     
 }
