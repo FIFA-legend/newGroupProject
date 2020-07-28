@@ -4,7 +4,7 @@
   <head>
     <title>Home</title>
     <style>
-      <%@ include file="WEB-INF/css/style.css"%>
+      <%@ include file="WEB-INF/static/css/style.css"%>
     </style>
   </head>
   <body>

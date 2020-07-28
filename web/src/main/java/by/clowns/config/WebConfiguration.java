@@ -6,6 +6,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
@@ -40,4 +41,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         registry.addFormatter(regionFormatter);
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("/WEB-INF/static/css/");
+    }
 }
