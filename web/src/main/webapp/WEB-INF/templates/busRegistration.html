@@ -3,30 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{bus.registration}"></title>
+    <link rel="stylesheet" th:href="@{/css/registration.css}" type="text/css">
 </head>
 <body>
-<div th:align="center">
+<div th:align="center" class="registration-form">
+    <h2 th:text="#{bus.registration}"></h2>
     <form th:action="@{/bus/register}" th:method="post" th:object="${bus}">
-        <label for="brand" th:text="#{brand}"></label>
-        <input type="text" th:field="*{brand}" id="brand"><br>
-        <p th:each="err : ${#fields.errors('brand')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="model" th:text="#{model}"></label>
-        <input type="text" th:field="*{model}" id="model"><br>
-        <p th:each="err : ${#fields.errors('model')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="number" th:text="#{number}"></label>
-        <input type="text" th:field="*{number}" id="number"><br>
-        <p th:each="err : ${#fields.errors('number')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="price" th:text="#{price}"></label>
-        <input type="number" th:field="*{price}" id="price"><br>
-        <p th:each="err : ${#fields.errors('price')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="capacity" th:text="#{capacity}"></label>
-        <input type="number" th:field="*{capacity}" id="capacity"><br>
-        <p th:each="err : ${#fields.errors('capacity')}" style="color: darkred;" th:text="#{${err}}"></p>
-        <label for="regions" th:text="#{region.name}"></label>
-        <select multiple="multiple" id="regions" th:field="*{regions}">
-            <option th:each="reg : ${regions}" th:value="${{reg}}" th:text="${reg.name}"></option>
-        </select><br>
-        <button type="submit" th:text="#{save}"></button>
+        <div class="data-field">
+            <input type="text" th:field="*{brand}" id="brand" required=""><br>
+            <label th:text="#{brand}"></label>
+            <p th:each="err : ${#fields.errors('brand')}" style="color: darkred;" th:text="#{${err}}"></p>
+        </div>
+        <div class="data-field">
+            <input type="text" th:field="*{model}" id="model" required=""><br>
+            <label th:text="#{model}"></label>
+            <p th:each="err : ${#fields.errors('model')}" style="color: darkred;" th:text="#{${err}}"></p>
+        </div>
+        <div class="data-field">
+            <input type="text" th:field="*{number}" id="number" required=""><br>
+            <label th:text="#{number}"></label>
+            <p th:each="err : ${#fields.errors('number')}" style="color: darkred;" th:text="#{${err}}"></p>
+        </div>
+        <div class="data-field">
+            <input type="number" th:field="*{price}" id="price" required=""><br>
+            <label th:text="#{price}"></label>
+            <p th:each="err : ${#fields.errors('price')}" style="color: darkred;" th:text="#{${err}}"></p>
+        </div>
+        <div class="data-field">
+            <input type="number" th:field="*{capacity}" id="capacity" required=""><br>
+            <label th:text="#{capacity}"></label>
+            <p th:each="err : ${#fields.errors('capacity')}" style="color: darkred;" th:text="#{${err}}"></p>
+        </div>
+        <div class="selectdiv">
+            <label>
+                <select multiple="multiple" id="regions" th:field="*{regions}">
+                    <option th:each="reg : ${regions}" th:value="${{reg}}" th:text="${reg.name}"></option>
+                </select>
+            </label>
+        </div>
+        <br>
+        <button type="submit" th:text="#{save}" class="mail-btn"></button>
     </form>
 </div>
 </body>
