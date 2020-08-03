@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.context.annotation.PropertySource;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

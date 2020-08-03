@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/cars.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/form.css}" type="text/css">
     <title th:text="#{car.list}"></title>
 </head>
 <body>
@@ -23,7 +24,7 @@
                 <hr>
             </li>
         </ul>
-        <a th:href="@{/}" class="home" th:text="#{home}"></a>
+        <a th:href="@{/}" class="button" th:text="#{home}"></a>
     </div>
     <div class="filter">
         <form th:action ="@{/cars}" method="get" th:object="${modelCar}">

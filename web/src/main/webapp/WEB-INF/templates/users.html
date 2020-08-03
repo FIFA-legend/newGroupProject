@@ -2,26 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/WEB-INF/css/style.css" type="text/css">
     <title th:text="#{user.list}"></title>
+    <link rel="stylesheet" th:href="@{/css/cars.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/form.css}" type="text/css">
 </head>
 <body>
     <div th:align="center" th:object="${users}">
-        <li th:each="user : ${users}">
-            <label for="username" th:text="#{username}"></label>
-            <a th:href="@{/user/{id}/requests(id=${user.id})}" id="username" th:text="${user.username}"></a>
-            <br>
-            <label for="role" th:text="#{role}"></label>
-            <span th:text="${user.role}" id="role"></span> <br>
-            <label for="realName" th:text="#{realName}"></label>
-            <span th:text="${user.passport.name}" id="realName"></span> <br>
-            <label for="realSurname" th:text="#{realSurname}"></label>
-            <span th:text="${user.passport.surname}" id="realSurname"></span> <br>
-            <label for="birth" th:text="#{birth}"></label>
-            <span th:text="${user.passport.birth}" id="birth"></span> <br>
-            <hr>
-        </li>
-        <a th:href="@{/}" class="home" th:text="#{home}"></a>
+        <ul style="list-style-type: none" class="border">
+            <li th:each="user : ${users}">
+                <label for="username" th:text="#{username}"></label>
+                <a th:href="@{/user/{id}/requests(id=${user.id})}" id="username" th:text="${user.username}"></a>
+                <br>
+                <label for="role" th:text="#{role}"></label>
+                <span th:text="${user.role}" id="role"></span> <br>
+                <label for="realName" th:text="#{realName}"></label>
+                <span th:text="${user.passport.name}" id="realName"></span> <br>
+                <label for="realSurname" th:text="#{realSurname}"></label>
+                <span th:text="${user.passport.surname}" id="realSurname"></span> <br>
+                <label for="birth" th:text="#{birth}"></label>
+                <span th:text="${user.passport.birth}" id="birth"></span> <br>
+                <hr>
+            </li>
+        </ul>
+        <a th:href="@{/}" class="button" th:text="#{home}"></a>
+    </div>
+    <div class="filter" th:align="center">
+        <form th:action="@{/users}" method="get" th:object="${modelUser}">
+            <label for="usernameFilter" th:text="#{username}"></label>
+            <input type="text" id="usernameFilter" th:field="*{username}"> <br>
+            <label for="nameFilter" th:text="#{realName}"></label>
+            <input type="text" id="nameFilter" th:field="*{realName}"> <br>
+            <label for="surnameFilter" th:text="#{realSurname}"></label>
+            <input type="text" id="surnameFilter" th:field="*{realSurname}"> <br>
+            <label for="startDate" th:text="#{date.start}"></label>
+            <input type="date" id="startDate" th:field="*{start}">
+            <label for="finishDate" th:text="#{date.finish}"></label>
+            <input type="date" id="finishDate" th:field="*{finish}"> <br>
+            <button type="submit" th:text="#{save}"></button>
+        </form>
     </div>
 </body>
 </html>
