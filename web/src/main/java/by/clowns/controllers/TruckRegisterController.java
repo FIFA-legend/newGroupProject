@@ -46,7 +46,7 @@ public class TruckRegisterController {
     public String saveTruck(@Valid Truck truck, Errors errors) {
         if (errors.hasErrors()) return "truckRegistration";
         truckService.create(truck);
-        return "redirect:/cars";
+        return "redirect:/cars/1";
     }
 
 }

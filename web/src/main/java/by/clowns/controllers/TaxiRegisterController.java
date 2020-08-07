@@ -52,7 +52,7 @@ public class TaxiRegisterController {
     public String saveTaxi(@Valid Taxi taxi, Errors errors) {
         if (errors.hasErrors()) return "taxiRegistration";
         taxiService.create(taxi);
-        return "redirect:/cars";
+        return "redirect:/cars/1";
     }
 
 }

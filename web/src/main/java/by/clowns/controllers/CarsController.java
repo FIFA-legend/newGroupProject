@@ -16,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Controller
 @ComponentScan("by.clowns.dao")
@@ -50,6 +52,17 @@ public class CarsController {
         return userService.getAllRoles()[1];
     }
 
+    private final Comparator<Car> carComparator = (o1, o2) -> {
+        if (!o1.getBrand().equals(o2.getBrand())) {
+            return o1.getBrand().compareTo(o2.getBrand());
+        } else if (!o1.getModel().equals(o2.getModel())){
+            return o1.getModel().compareTo(o2.getModel());
+        } else {
+            return o1.getNumber().compareTo(o2.getNumber());
+        }
+    };
+
+
     @Autowired
     public CarsController(CarService carService, RegionService regionService, CarFilterService carFilterService, UserService userService) {
         this.carService = carService;
@@ -58,10 +71,20 @@ public class CarsController {
         this.userService = userService;
     }
 
-    @GetMapping("/cars")
-    public String cars(Model model, CarDTO car) {
-        Set<Car> cars = carFilterService.filter(car);
-        model.addAttribute("cars", cars);
+    @GetMapping("/cars/{page}")
+    public String cars(Model model, CarDTO car, @PathVariable int page) {
+        Set<Car> cars = new TreeSet<>(carComparator);
+        cars.addAll(carFilterService.filter(car));
+        Set<Car> carsOnPage = new TreeSet<>(carComparator);
+        int coefficient = page - 1;
+        int i = 0;
+        for (Car c : cars) {
+            if (i / 10 == coefficient) {
+                carsOnPage.add(c);
+            }
+            i++;
+        }
+        model.addAttribute("cars", carsOnPage);
         Object sessionUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (sessionUser instanceof UserDetails) {
@@ -69,6 +92,13 @@ public class CarsController {
         } else {
             username = sessionUser.toString();
         }
+        int allPages = (cars.size() - 1) / 10 + 1;
+        model.addAttribute("minPrice", car.getMinPrice());
+        model.addAttribute("maxPrice", car.getMaxPrice());
+        model.addAttribute("brand", car.getBrand());
+        model.addAttribute("number", car.getNumber());
+        model.addAttribute("page", page);
+        model.addAttribute("allPages", allPages);
         model.addAttribute("loggedUser", userService.get(username));
         return "cars";
     }

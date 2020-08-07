@@ -46,6 +46,6 @@ public class BusRegisterController {
     public String busSave(@Valid Bus bus, Errors errors) {
         if (errors.hasErrors()) return "busRegistration";
         busService.create(bus);
-        return "redirect:/cars";
+        return "redirect:/cars/1";
     }
 }

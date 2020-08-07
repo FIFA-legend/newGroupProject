@@ -24,10 +24,88 @@
                 <hr>
             </li>
         </ul>
+        <div th:align="center" th:if="${page==1 and page!=allPages}">
+            <div th:if="${allPages==2}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2"></a>
+            </div>
+            <div th:if="${allPages==3}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="3"></a>
+            </div>
+            <div th:if="${allPages > 3}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2"></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page==allPages and page!=1}">
+            <div th:if="${allPages==2}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2"></a>
+            </div>
+            <div th:if="${allPages==3}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="3"></a>
+            </div>
+            <div th:if="${allPages > 3}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1"></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages - 1}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages - 1}"></a>
+                <a th:href="@{/cars/{id}(id=${allPages}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page==2}">
+            <div th:if="${allPages==3}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="3"></a>
+            </div>
+            <div th:if="${allPages==4}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="3 "></a>
+                <a th:href="@{/cars/4(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="4"></a>
+            </div>
+            <div th:if="${allPages>4}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="3"></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page==allPages - 1}">
+            <div th:if="${allPages==4}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="3 "></a>
+                <a th:href="@{/cars/4(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="4"></a>
+            </div>
+            <div th:if="${allPages>4}">
+                <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1 "></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages - 2}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages - 2}"></a>
+                <a th:href="@{/cars/{id}(id=${allPages - 1}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages - 1}"></a>
+                <a th:href="@{/cars/{id}(id=${allPages}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page!=allPages and page!=1 and page!=2 and page!=allPages - 1 and allPages>4}">
+            <a th:href="@{/cars/1(brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="1"></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${page - 1}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${page - 1} "></a>
+            <a th:href="@{/cars/{id}(id=${page}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${page} "></a>
+            <a th:href="@{/cars/{id}(id=${page + 1}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${page + 1} "></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${allPages}, brand=${brand}, number=${number}, minPrice=${minPrice}, maxPrice=${maxPrice})}" th:text="${allPages}"></a>
+        </div>
         <a th:href="@{/}" class="button" th:text="#{home}"></a>
     </div>
     <div class="filter">
-        <form th:action ="@{/cars}" method="get" th:object="${modelCar}">
+        <form th:action ="@{/cars/1}" method="get" th:object="${modelCar}">
             <label for="min_price_form" th:text="#{min.price}"></label>
             <input type="number" name="price" id="min_price_form" th:field="*{minPrice}"> <br>
             <label for="max_price_form" th:text="#{max.price}"></label>

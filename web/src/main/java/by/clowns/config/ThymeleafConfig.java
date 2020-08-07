@@ -16,12 +16,6 @@ public class ThymeleafConfig {
     @Value("${web.character.encoding}")
     private String characterEncoding;
 
-    @Value("${web.prefix}")
-    private String prefix;
-
-    @Value("${web.suffix}")
-    private String suffix;
-
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
