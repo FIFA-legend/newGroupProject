@@ -9,10 +9,13 @@
   </head>
   <body>
 <p>
-  <a href="${pageContext.request.contextPath}/users" class="check-all">Show all users</a>
+  <a href="${pageContext.request.contextPath}/users/1" class="check-all">Show all users</a>
 </p>
 <p>
   <a href="${pageContext.request.contextPath}/cars/1" class="check-all">Show all cars</a>
+</p>
+<p>
+  <a href="${pageContext.request.contextPath}/requests/1" class="check-all">Show all requests</a>
 </p>
   </body>
 </html>

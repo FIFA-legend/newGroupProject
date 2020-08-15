@@ -24,10 +24,88 @@
                 <hr>
             </li>
         </ul>
+        <div th:align="center" th:if="${page==1 and page!=allPages}">
+            <div th:if="${allPages==2}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2"></a>
+            </div>
+            <div th:if="${allPages==3}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="3"></a>
+            </div>
+            <div th:if="${allPages > 3}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2"></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page==allPages and page!=1}">
+            <div th:if="${allPages==2}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2"></a>
+            </div>
+            <div th:if="${allPages==3}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="3"></a>
+            </div>
+            <div th:if="${allPages > 3}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1"></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages - 1}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages - 1}"></a>
+                <a th:href="@{/cars/{id}(id=${allPages}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page==2}">
+            <div th:if="${allPages==3}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="3"></a>
+            </div>
+            <div th:if="${allPages==4}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="3 "></a>
+                <a th:href="@{/cars/4(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="4"></a>
+            </div>
+            <div th:if="${allPages>4}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="3"></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page==allPages - 1}">
+            <div th:if="${allPages==4}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                <a th:href="@{/cars/2(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="2 "></a>
+                <a th:href="@{/cars/3(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="3 "></a>
+                <a th:href="@{/cars/4(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="4"></a>
+            </div>
+            <div th:if="${allPages>4}">
+                <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1 "></a>
+                ...
+                <a th:href="@{/cars/{id}(id=${allPages - 2}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages - 2}"></a>
+                <a th:href="@{/cars/{id}(id=${allPages - 1}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages - 1}"></a>
+                <a th:href="@{/cars/{id}(id=${allPages}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages}"></a>
+            </div>
+        </div>
+        <div th:align="center" th:if="${page!=allPages and page!=1 and page!=2 and page!=allPages - 1 and allPages>4}">
+            <a th:href="@{/cars/1(username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="1"></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${page - 1}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${page - 1} "></a>
+            <a th:href="@{/cars/{id}(id=${page}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${page} "></a>
+            <a th:href="@{/cars/{id}(id=${page + 1}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${page + 1} "></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${allPages}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish})}" th:text="${allPages}"></a>
+        </div>
         <a th:href="@{/}" class="button" th:text="#{home}"></a>
     </div>
     <div class="filter" th:align="center">
-        <form th:action="@{/users}" method="get" th:object="${modelUser}">
+        <form th:action="@{/users/1}" method="get" th:object="${modelUser}">
             <label for="usernameFilter" th:text="#{username}"></label>
             <input type="text" id="usernameFilter" th:field="*{username}"> <br>
             <label for="nameFilter" th:text="#{realName}"></label>

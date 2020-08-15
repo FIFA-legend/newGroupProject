@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+    <link rel="stylesheet" th:href="@{/css/cars.css}" type="text/css">
+</head>
+<body>
+<div th:align="center">
+    <ul style="list-style-type: none" class="border">
+        <li th:each="request : ${requests}">
+            <label for="username" th:text="#{username}"></label>
+            <span th:text="${request.user.username}" id="username"></span> <br>
+            <label for="brand" th:text="#{brand}"></label>
+            <span th:text="${request.car.brand}" id="brand"></span> <br>
+            <label for="model" th:text="#{model}"></label>
+            <span th:text="${request.car.model}" id="model"></span> <br>
+            <label for="number" th:text="#{number}"></label>
+            <span th:text="${request.car.number}" id="number"></span> <br>
+        </li>
+    </ul>
+    <div th:align="center" th:if="${page==1 and page!=allPages}">
+        <div th:if="${allPages==2}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2"></a>
+        </div>
+        <div th:if="${allPages==3}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2 "></a>
+            <a th:href="@{/cars/3}" th:text="3"></a>
+        </div>
+        <div th:if="${allPages > 3}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2"></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${allPages})}" th:text="${allPages}"></a>
+        </div>
+    </div>
+    <div th:align="center" th:if="${page==allPages and page!=1}">
+        <div th:if="${allPages==2}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2"></a>
+        </div>
+        <div th:if="${allPages==3}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2 "></a>
+            <a th:href="@{/cars/3}" th:text="3"></a>
+        </div>
+        <div th:if="${allPages > 3}">
+            <a th:href="@{/cars/1}" th:text="1"></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${allPages - 1})}" th:text="${allPages - 1}"></a>
+            <a th:href="@{/cars/{id}(id=${allPages})}" th:text="${allPages}"></a>
+        </div>
+    </div>
+    <div th:align="center" th:if="${page==2}">
+        <div th:if="${allPages==3}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2 "></a>
+            <a th:href="@{/cars/3}" th:text="3"></a>
+        </div>
+        <div th:if="${allPages==4}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2 "></a>
+            <a th:href="@{/cars/3}" th:text="3 "></a>
+            <a th:href="@{/cars/4}" th:text="4"></a>
+        </div>
+        <div th:if="${allPages>4}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2 "></a>
+            <a th:href="@{/cars/3}" th:text="3"></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${allPages})}" th:text="${allPages}"></a>
+        </div>
+    </div>
+    <div th:align="center" th:if="${page==allPages - 1}">
+        <div th:if="${allPages==4}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            <a th:href="@{/cars/2}" th:text="2 "></a>
+            <a th:href="@{/cars/3}" th:text="3 "></a>
+            <a th:href="@{/cars/4}" th:text="4"></a>
+        </div>
+        <div th:if="${allPages>4}">
+            <a th:href="@{/cars/1}" th:text="1 "></a>
+            ...
+            <a th:href="@{/cars/{id}(id=${allPages - 2})}" th:text="${allPages - 2}"></a>
+            <a th:href="@{/cars/{id}(id=${allPages - 1})}" th:text="${allPages - 1}"></a>
+            <a th:href="@{/cars/{id}(id=${allPages})}" th:text="${allPages}"></a>
+        </div>
+    </div>
+    <div th:align="center" th:if="${page!=allPages and page!=1 and page!=2 and page!=allPages - 1 and allPages>4}">
+        <a th:href="@{/cars/1}" th:text="1"></a>
+        ...
+        <a th:href="@{/cars/{id}(id=${page - 1})}" th:text="${page - 1} "></a>
+        <a th:href="@{/cars/{id}(id=${page})}" th:text="${page} "></a>
+        <a th:href="@{/cars/{id}(id=${page + 1})}" th:text="${page + 1} "></a>
+        ...
+        <a th:href="@{/cars/{id}(id=${allPages})}" th:text="${allPages}"></a>
+    </div>
+    <a th:href="@{/}" class="button" th:text="#{home}"></a>
+</div>
+</body>
+</html>
