@@ -1,7 +1,6 @@
 package by.clowns.controllers;
 
 import by.clowns.dto.UserDTO;
-import by.clowns.entity.Car;
 import by.clowns.entity.User;
 import by.clowns.service.UserFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class UsersController {
         return new UserDTO();
     }
 
-    private Comparator<User> userComparator = Comparator.comparing(User::getUsername);
+    private final Comparator<User> userComparator = Comparator.comparing(User::getUsername);
 
     @GetMapping("/users/{page}")
     public String users(Model model, UserDTO userDTO, @PathVariable int page) {

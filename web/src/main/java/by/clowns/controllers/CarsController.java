@@ -62,7 +62,6 @@ public class CarsController {
         }
     };
 
-
     @Autowired
     public CarsController(CarService carService, RegionService regionService, CarFilterService carFilterService, UserService userService) {
         this.carService = carService;
