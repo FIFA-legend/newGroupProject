@@ -5,6 +5,7 @@ import by.clowns.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +38,7 @@ public class CarService implements ServiceInterface<Car> {
         carToUpdate.setPrice(entity.getPrice());
         carToUpdate.setRegions(entity.getRegions());
         carToUpdate.setRequest(entity.getRequest());
+        carToUpdate.setRentTime(entity.getRentTime());
         carRepository.save(carToUpdate);
     }
 
@@ -50,4 +52,9 @@ public class CarService implements ServiceInterface<Car> {
         return carRepository.findById(id);
     }
 
+    public void updateDate(Car entity, long id) {
+        Car carToUpdate = carRepository.findById(id);
+        carToUpdate.setRentTime(entity.getRentTime());
+        carRepository.save(carToUpdate);
+    }
 }

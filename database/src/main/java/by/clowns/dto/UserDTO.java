@@ -22,4 +22,9 @@ public class UserDTO {
     private Date start;
 
     private Date finish;
+
+    public UserDTO(Date start, Date finish) {
+        this.start = start;
+        this.finish = finish;
+    }
 }

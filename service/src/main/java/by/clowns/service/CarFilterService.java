@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,5 +24,15 @@ public class CarFilterService {
 
     public Set<Car> filter(CarDTO car) {
         return new HashSet<>(carFilter.filter(car));
+    }
+
+    public Set<Car> getFreeAndFilteredCars(CarDTO car) {
+        Set<Car> cars = filter(car);
+        Date date = new Date(System.currentTimeMillis());
+        Set<Car> carsToReturn = new HashSet<>();
+        for (Car c : cars) {
+            if (c.getRentTime() != null && c.getRentTime().before(date)) carsToReturn.add(c);
+        }
+        return carsToReturn;
     }
 }

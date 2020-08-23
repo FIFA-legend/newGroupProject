@@ -44,13 +44,7 @@ public class UserService implements ServiceInterface<User>, UserDetailsService {
 
     @Override
     public void update(User entity, long id) {
-        User foundUser = userRepository.findById(id);
-        foundUser.setUsername(entity.getUsername());
-        foundUser.setPassword(bCryptPasswordEncoder.encode(entity.getPassword()));
-        foundUser.setPassport(entity.getPassport());
-        foundUser.setRole(entity.getRole());
-        foundUser.setRequests(entity.getRequests());
-        userRepository.save(foundUser);
+        userRepository.save(entity);
     }
 
     @Override

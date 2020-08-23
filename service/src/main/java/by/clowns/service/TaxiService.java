@@ -6,6 +6,7 @@ import by.clowns.entity.Taxi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,5 +55,15 @@ public class TaxiService implements ServiceInterface<Taxi> {
 
     public Comfort[] getAllComforts() {
         return Comfort.values();
+    }
+
+    public Set<Taxi> getFreeTaxis() {
+        List<Taxi> taxis = taxiRepository.findAll();
+        Date date = new Date(System.currentTimeMillis());
+        Set<Taxi> taxisToReturn = new HashSet<>();
+        for (Taxi taxi : taxis) {
+            if (taxi.getRentTime().before(date)) taxisToReturn.add(taxi);
+        }
+        return taxisToReturn;
     }
 }

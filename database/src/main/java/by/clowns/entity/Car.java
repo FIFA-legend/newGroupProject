@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -34,6 +35,9 @@ public class Car extends BaseEntity {
     @Min(value = 2, message = "errors.car.price")
     @Max(value = 50, message = "errors.car.price")
     private double price;
+
+    @Column(name = "rent_time")
+    private Date rentTime;
 
     @Column(name = "number")
     @Pattern(regexp = "^\\d{4}\\s[A-Z]{2}-\\d$", message = "errors.car.number")

@@ -5,6 +5,7 @@ import by.clowns.entity.Truck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,5 +50,15 @@ public class TruckService implements ServiceInterface<Truck> {
     @Override
     public Truck get(long id) {
         return truckRepository.findById(id);
+    }
+
+    public Set<Truck> getFreeTrucks() {
+        List<Truck> trucks = truckRepository.findAll();
+        Date date = new Date(System.currentTimeMillis());
+        Set<Truck> trucksToReturn = new HashSet<>();
+        for (Truck truck : trucks) {
+            if (truck.getRentTime().before(date)) trucksToReturn.add(truck);
+        }
+        return trucksToReturn;
     }
 }

@@ -3,6 +3,7 @@ package by.clowns.controllers;
 import by.clowns.entity.Car;
 import by.clowns.entity.RentRequest;
 import by.clowns.entity.User;
+import by.clowns.service.CarService;
 import by.clowns.service.RequestService;
 import by.clowns.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -22,12 +24,15 @@ public class RequestController {
 
     private final RequestService requestService;
 
+    private final CarService carService;
+
     private Map<String, Object> map;
 
     @Autowired
-    public RequestController(UserService userService, RequestService requestService) {
+    public RequestController(UserService userService, RequestService requestService, CarService carService) {
         this.userService = userService;
         this.requestService = requestService;
+        this.carService = carService;
     }
 
     @GetMapping("/request/save")
@@ -48,17 +53,21 @@ public class RequestController {
     }
 
     @PostMapping("/request/save")
-    public String saveRequest() {
+    public String saveRequest(Car car) {
         User user;
-        Car car;
+        Car c;
+        Date now = new Date(System.currentTimeMillis());
         try {
             if (map.get("user") instanceof User) {
                 if (map.get("car") instanceof Car) {
-                    user = (User) map.get("user");
-                    car = (Car) map.get("car");
-                    RentRequest request = new RentRequest(user, car);
-                    requestService.create(request);
-                    return "successRequest";
+                    if (car.getRentTime().after(now)) {
+                        user = (User) map.get("user");
+                        c = (Car) map.get("car");
+                        carService.updateDate(car, c.getId());
+                        RentRequest request = new RentRequest(user, c);
+                        requestService.create(request);
+                        return "successRequest";
+                    }
                 }
             }
             return "failRequest";

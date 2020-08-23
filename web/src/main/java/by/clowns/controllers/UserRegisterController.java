@@ -46,6 +46,7 @@ public class UserRegisterController {
     @PostMapping("/user/register")
     public String getRegister(@Valid User user, Errors userErrors, @Valid Passport passport, Errors passportErrors) {
         if (userErrors.hasErrors() || passportErrors.hasErrors()) return "registrationPage";
+        user.setRole(Role.CLIENT);
         user.setPassport(passport);
         userService.create(user);
         return "redirect:/login";

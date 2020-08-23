@@ -31,6 +31,8 @@
                 <span th:text="${user.passport.surname}" id="realSurname"></span> <br>
                 <label for="birth" th:text="#{birth}"></label>
                 <span th:text="${user.passport.birth}" id="birth"></span> <br>
+                <a th:href="@{/users/{id}(id=${page}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish}, admin=${user.username})}" th:text="#{give.admin}" th:if="${user.role!=admin}"></a> <br>
+                <a th:href="@{/users/{id}(id=${page}, username=${username}, realName=${realName}, realSurname=${realSurname}, start=${start}, finish=${finish}, admin=${user.username})}" th:text="#{remove.admin}" th:if="${user.role==admin}"></a> <br>
                 <hr>
             </li>
         </ul>
@@ -117,7 +119,7 @@
     <div class="filter" th:align="center">
         <form th:action="@{/users/1}" method="get" th:object="${modelUser}">
             <label for="usernameFilter" th:text="#{username}"></label>
-            <input type="text" id="usernameFilter" th:field="*{username}"> <br>
+            <input type="text" id="usernameFilter" th:field="*{username}" value="Tank"> <br>
             <label for="nameFilter" th:text="#{realName}"></label>
             <input type="text" id="nameFilter" th:field="*{realName}"> <br>
             <label for="surnameFilter" th:text="#{realSurname}"></label>

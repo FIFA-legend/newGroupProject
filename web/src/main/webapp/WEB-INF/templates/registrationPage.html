@@ -27,14 +27,6 @@
                 <input type="text" th:field="*{passportId}"><br>
                 <p th:each="err : ${#fields.errors('passportId')}" style="color: darkred;" th:text="#{${err}}"></p>
             </div>
-            <label th:for="role" th:text="#{role}"></label>
-            <ul style="list-style-type: none">
-                <li th:each="role : ${roles}">
-                    <input type="radio" th:value="${role}" th:field="*{role}">
-                    <span th:text="${#strings.capitalize(#strings.toLowerCase(role))}"></span>
-                </li>
-            </ul>
-            <p th:each="err : ${#fields.errors('role')}" style="color: darkred;" th:text="#{${err}}"></p>
             <button type="submit" th:text="#{save}"></button>
         </form>
     </div>

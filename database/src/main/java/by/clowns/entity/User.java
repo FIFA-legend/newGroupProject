@@ -32,7 +32,6 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    @NotNull(message = "errors.user.role")
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)

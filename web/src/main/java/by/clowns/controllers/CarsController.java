@@ -73,7 +73,7 @@ public class CarsController {
     @GetMapping("/cars/{page}")
     public String cars(Model model, CarDTO car, @PathVariable int page) {
         Set<Car> cars = new TreeSet<>(carComparator);
-        cars.addAll(carFilterService.filter(car));
+        cars.addAll(carFilterService.getFreeAndFilteredCars(car));
         Set<Car> carsOnPage = new TreeSet<>(carComparator);
         int coefficient = page - 1;
         int i = 0;
