@@ -1,60 +1,22 @@
 package by.clowns.service;
 
 import by.clowns.entity.Car;
-import by.clowns.repository.CarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
-public class CarService implements ServiceInterface<Car> {
+public interface CarService {
 
-    private final CarRepository carRepository;
+    void create(Car entity);
 
-    @Autowired
-    public CarService(CarRepository carRepository) {
-        this.carRepository = carRepository;
-    }
+    Set<Car> read();
 
-    @Override
-    public void create(Car entity) {
-        carRepository.save(entity);
-    }
+    void update(Car entity);
 
-    @Override
-    public Set<Car> read() {
-        List<Car> carList = carRepository.findAll();
-        return new HashSet<>(carList);
-    }
+    void delete(long id);
 
-    @Override
-    public void update(Car entity, long id) {
-        Car carToUpdate = carRepository.findById(id);
-        carToUpdate.setNumber(entity.getNumber());
-        carToUpdate.setPrice(entity.getPrice());
-        carToUpdate.setRegions(entity.getRegions());
-        carToUpdate.setRequest(entity.getRequest());
-        carToUpdate.setRentTime(entity.getRentTime());
-        carRepository.save(carToUpdate);
-    }
+    Car get(long id);
 
-    @Override
-    public void delete(long id) {
-        carRepository.deleteById(id);
-    }
-
-    @Override
-    public Car get(long id) {
-        return carRepository.findById(id);
-    }
-
-    public void updateDate(Car entity, long id) {
-        Car carToUpdate = carRepository.findById(id);
-        carToUpdate.setRentTime(entity.getRentTime());
-        carRepository.save(carToUpdate);
-    }
+    void updateDate(Car entity, long id);
 }

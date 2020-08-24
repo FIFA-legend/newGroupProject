@@ -4,7 +4,7 @@ import by.clowns.dto.UserDTO;
 import by.clowns.entity.Role;
 import by.clowns.entity.User;
 import by.clowns.service.UserFilterService;
-import by.clowns.service.UserService;
+import by.clowns.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +23,10 @@ public class UsersController {
 
     private final UserFilterService userFilterService;
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UsersController(UserFilterService userFilterService, UserService userService) {
+    public UsersController(UserFilterService userFilterService, UserServiceImpl userService) {
         this.userFilterService = userFilterService;
         this.userService = userService;
     }
@@ -53,7 +53,7 @@ public class UsersController {
             } else {
                 newAdmin.setRole(Role.CLIENT);
             }
-            userService.update(newAdmin, newAdmin.getId());
+            userService.update(newAdmin);
         }
 
         Set<User> users = new TreeSet<>(userComparator);

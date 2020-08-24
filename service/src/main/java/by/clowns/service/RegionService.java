@@ -1,50 +1,21 @@
 package by.clowns.service;
 
-import by.clowns.repository.RegionRepository;
 import by.clowns.entity.Region;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
-public class RegionService implements ServiceInterface<Region> {
+public interface RegionService {
 
-    private final RegionRepository regionRepository;
+    void create(Region entity);
 
-    @Autowired
-    public RegionService(RegionRepository regionRepository) {
-        this.regionRepository = regionRepository;
-    }
+    Set<Region> read();
 
-    @Override
-    public void create(Region entity) {
-        regionRepository.save(entity);
-    }
+    void update(Region entity);
 
-    @Override
-    public Set<Region> read() {
-        List<Region> regionList = regionRepository.findAll();
-        return new HashSet<>(regionList);
-    }
+    void delete(long id);
 
-    @Override
-    public void update(Region entity, long id) {
-        Region regionToUpdate = regionRepository.findById(id);
-        regionToUpdate.setName(entity.getName());
-        regionToUpdate.setCars(entity.getCars());
-        regionRepository.save(regionToUpdate);
-    }
+    Region get(long id);
 
-    @Override
-    public void delete(long id) {
-        regionRepository.deleteById(id);
-    }
-
-    @Override
-    public Region get(long id) {
-        return regionRepository.findById(id);
-    }
 }

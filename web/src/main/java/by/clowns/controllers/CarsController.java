@@ -7,7 +7,7 @@ import by.clowns.entity.Role;
 import by.clowns.service.CarFilterService;
 import by.clowns.service.CarService;
 import by.clowns.service.RegionService;
-import by.clowns.service.UserService;
+import by.clowns.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +30,7 @@ public class CarsController {
 
     private final CarFilterService carFilterService;
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @ModelAttribute("cars")
     Set<Car> cars(){
@@ -63,7 +63,7 @@ public class CarsController {
     };
 
     @Autowired
-    public CarsController(CarService carService, RegionService regionService, CarFilterService carFilterService, UserService userService) {
+    public CarsController(CarService carService, RegionService regionService, CarFilterService carFilterService, UserServiceImpl userService) {
         this.carService = carService;
         this.regionService = regionService;
         this.carFilterService = carFilterService;
@@ -73,7 +73,7 @@ public class CarsController {
     @GetMapping("/cars/{page}")
     public String cars(Model model, CarDTO car, @PathVariable int page) {
         Set<Car> cars = new TreeSet<>(carComparator);
-        cars.addAll(carFilterService.getFreeAndFilteredCars(car));
+        cars.addAll(carFilterService.getVacantCars(car));
         Set<Car> carsOnPage = new TreeSet<>(carComparator);
         int coefficient = page - 1;
         int i = 0;

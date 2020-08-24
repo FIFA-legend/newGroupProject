@@ -2,7 +2,6 @@ package by.clowns.formatters;
 
 import by.clowns.entity.Region;
 import by.clowns.repository.RegionRepository;
-import by.clowns.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Service;

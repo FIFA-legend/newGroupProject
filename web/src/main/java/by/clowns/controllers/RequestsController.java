@@ -1,7 +1,6 @@
 package by.clowns.controllers;
 
 import by.clowns.entity.RentRequest;
-import by.clowns.entity.User;
 import by.clowns.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ public class RequestsController {
         this.requestService = requestService;
     }
 
-    private Comparator<RentRequest> requestComparator = (o1, o2) -> {
+    private final Comparator<RentRequest> requestComparator = (o1, o2) -> {
         if (!o1.getUser().getUsername().equals(o2.getUser().getUsername())) {
             return o1.getUser().getUsername().compareTo(o2.getUser().getUsername());
         } else if (!o1.getCar().getBrand().equals(o2.getCar().getBrand())) {

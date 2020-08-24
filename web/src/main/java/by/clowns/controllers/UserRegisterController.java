@@ -3,7 +3,7 @@ package by.clowns.controllers;
 import by.clowns.entity.Passport;
 import by.clowns.entity.Role;
 import by.clowns.entity.User;
-import by.clowns.service.UserService;
+import by.clowns.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -16,10 +16,10 @@ import javax.validation.Valid;
 @Controller
 public class UserRegisterController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserRegisterController(UserService userService) {
+    public UserRegisterController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

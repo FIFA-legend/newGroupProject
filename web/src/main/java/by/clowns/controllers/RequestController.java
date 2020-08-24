@@ -5,7 +5,7 @@ import by.clowns.entity.RentRequest;
 import by.clowns.entity.User;
 import by.clowns.service.CarService;
 import by.clowns.service.RequestService;
-import by.clowns.service.UserService;
+import by.clowns.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 public class RequestController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     private final RequestService requestService;
 
@@ -29,7 +29,7 @@ public class RequestController {
     private Map<String, Object> map;
 
     @Autowired
-    public RequestController(UserService userService, RequestService requestService, CarService carService) {
+    public RequestController(UserServiceImpl userService, RequestService requestService, CarService carService) {
         this.userService = userService;
         this.requestService = requestService;
         this.carService = carService;

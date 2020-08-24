@@ -1,69 +1,26 @@
 package by.clowns.service;
 
 import by.clowns.entity.Comfort;
-import by.clowns.repository.TaxiRepository;
 import by.clowns.entity.Taxi;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
-public class TaxiService implements ServiceInterface<Taxi> {
+public interface TaxiService {
 
-    private final TaxiRepository taxiRepository;
+    void create(Taxi entity);
 
-    @Autowired
-    public TaxiService(TaxiRepository taxiRepository) {
-        this.taxiRepository = taxiRepository;
-    }
+    Set<Taxi> read();
 
-    @Override
-    public void create(Taxi entity) {
-        taxiRepository.save(entity);
-    }
+    void update(Taxi entity);
 
-    @Override
-    public Set<Taxi> read() {
-        List<Taxi> taxiList = taxiRepository.findAll();
-        return new HashSet<>(taxiList);
-    }
+    void delete(long id);
 
-    @Override
-    public void update(Taxi entity, long id) {
-        Taxi taxiToChange = taxiRepository.findById(id);
-        taxiToChange.setComfort(entity.getComfort());
-        taxiToChange.setNumber(entity.getNumber());
-        taxiToChange.setPrice(entity.getPrice());
-        taxiToChange.setRegions(entity.getRegions());
-        taxiToChange.setRequest(entity.getRequest());
-        taxiRepository.save(taxiToChange);
-    }
+    Taxi get(long id);
 
-    @Override
-    public void delete(long id) {
-        taxiRepository.deleteById(id);
-    }
+    Comfort[] getAllComforts();
 
-    @Override
-    public Taxi get(long id) {
-        return taxiRepository.findById(id);
-    }
+    Set<Taxi> getUnselectedTaxis();
 
-    public Comfort[] getAllComforts() {
-        return Comfort.values();
-    }
-
-    public Set<Taxi> getFreeTaxis() {
-        List<Taxi> taxis = taxiRepository.findAll();
-        Date date = new Date(System.currentTimeMillis());
-        Set<Taxi> taxisToReturn = new HashSet<>();
-        for (Taxi taxi : taxis) {
-            if (taxi.getRentTime().before(date)) taxisToReturn.add(taxi);
-        }
-        return taxisToReturn;
-    }
 }
